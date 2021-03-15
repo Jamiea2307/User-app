@@ -1,11 +1,13 @@
 require("dotenv").config();
 const express = require("express");
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-
+const { ApolloServer } = require("apollo-server-express");
+const typeDefs = require("./schema/schema");
+const resolvers = require("./resolvers/resolvers");
 const mongoose = require("mongoose");
 
+const app = express();
+
+// CONNECT TO DB
 mongoose.connect(
   process.env.DB_CONNECTION,
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -16,18 +18,18 @@ const db = mongoose.connection;
 
 db.on("error", (error) => console.error(error));
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+// const indexRoute = require("./routes/index");
+// const userRoute = require("./routes/users");
 
-const app = express();
+const server = new ApolloServer({ typeDefs, resolvers });
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+server.applyMiddleware({ app });
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+// app.use("/index", indexRoute);
+// app.use("/user", userRoute);
+
+app.listen({ port: 4000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+);
 
 module.exports = app;
