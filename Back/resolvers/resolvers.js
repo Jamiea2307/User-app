@@ -1,26 +1,25 @@
-// Provide resolver functions for your schema fields
+const bcrypt = require("bcrypt");
+const { registerValidation } = require("../validation/Register");
 const User = require("../model/User");
-const mongoose = require("mongoose");
 
-const Cat = mongoose.model("Cat", { name: String });
 const resolvers = {
   Query: {
     hello: () => "Hello world!",
-    cats: () => Cat.find(),
     users: () => User.find(),
   },
   Mutation: {
-    createCat: async (__, { name }) => {
-      const kitty = new Cat({ name });
-      await kitty.save();
-      return kitty;
-    },
     createUser: async (__, details) => {
-      console.log(details);
+      const { error } = registerValidation(details);
+      if (error) throw new Error(error);
+
+      const emailExists = await User.findOne({ email: details.email });
+      if (emailExists) throw new Error("Email already Exists.");
+
+      const salt = await bcrypt.genSalt(10);
+      details.password = await bcrypt.hash(details.password, salt);
       const user = new User(details);
       await user.save();
       return user;
-      s;
     },
   },
 };
