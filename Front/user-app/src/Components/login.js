@@ -1,29 +1,47 @@
-import { useQuery, gql } from "@apollo/client";
-
-const GET_USERS = gql`
-  query GetUsers {
-    users {
-      name
-      email
-      password
-    }
-  }
-`;
+import { useState } from "react";
+import { useQuery } from "@apollo/client";
+import { UserFormBox, UserBox, SubmitBox } from "../Styles/userFormStyles";
+import { GET_USERS } from "../Queries/login";
+import { loginData } from "../Constants/login";
+import { Link, useHistory } from "react-router-dom";
 
 const Login = () => {
-  const { loading, error, data } = useQuery(GET_USERS);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-  console.log(data);
+  let history = useHistory();
+  const getUser = () => {};
 
-  return data.users.map((user) => (
-    <div>
-      <span>{user.name}</span>
-      <br />
-      <span>{user.email}</span>
-    </div>
-  ));
+  return (
+    <UserFormBox>
+      <h2>{loginData.title}</h2>
+      <form className="login-form" onSubmit={getUser}>
+        <UserBox className="user-box">
+          <input
+            className="login-input"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label>{loginData.email} </label>
+        </UserBox>
+        <UserBox>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <label>{loginData.password}</label>
+        </UserBox>
+        <div className="errorMessage">{}</div>
+        <SubmitBox type="submit" value="Submit" />
+      </form>
+      <Link className="pageLink" to="/Register">
+        {loginData.linkText}
+      </Link>
+    </UserFormBox>
+  );
 };
 
 export default Login;

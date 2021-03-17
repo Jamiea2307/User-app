@@ -1,85 +1,87 @@
-import { useMutation, gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+
+import { CREATE_USER } from "../Mutations/register";
 import { useState } from "react";
 import {
-  LoginBox,
-  LoginTitle,
+  UserFormBox,
   UserBox,
-  LoginInput,
-  LoginLabel,
   SubmitBox,
   ErrorMessage,
-  LoginLink,
-} from "../Styles/loginstyles";
+} from "../Styles/userFormStyles";
 import { registrationData } from "../Constants/registration";
-
 import { Link } from "react-router-dom";
-
-const CREATE_USER = gql`
-  mutation createUser($name: String!, $email: String!, $password: String!) {
-    createUser(name: $name, email: $email, password: $password) {
-      name
-      email
-      password
-    }
-  }
-`;
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [formDisplay, setFormDisplay] = useState("block");
   const [successDisplay, setSuccessDisplay] = useState("none");
-  const [createUser, { data }] = useMutation(CREATE_USER);
+  const [createUser] = useMutation(CREATE_USER);
+
+  const submitUser = async () => {
+    try {
+      await createUser({
+        variables: {
+          name: name,
+          email: email,
+          password: password,
+        },
+      });
+    } catch (err) {
+      setErrorMessage(err.message);
+    }
+  };
 
   return (
-    <LoginBox>
-      <LoginTitle>{registrationData.title}</LoginTitle>
+    <UserFormBox>
+      <h2>{registrationData.title}</h2>
       <form
         style={{ display: formDisplay }}
         className="registrationForm"
         onSubmit={(e) => {
           e.preventDefault();
-          createUser({
-            variables: { name: name, email: email, password: password },
-          });
+          if (name === "" || email === "" || password === "") {
+            return;
+          }
+          submitUser();
         }}
       >
         <UserBox>
-          <LoginInput
+          <input
             type="text"
-            value={name}
+            // value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <LoginLabel>{registrationData.name} </LoginLabel>
+          <label>{registrationData.name} </label>
         </UserBox>
         <UserBox>
-          <LoginInput
+          <input
             type="text"
-            value={email}
+            // value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <LoginLabel>{registrationData.email} </LoginLabel>
+          <label>{registrationData.email} </label>
         </UserBox>
         <UserBox>
-          <LoginInput
+          <input
             type="password"
-            value={password}
+            // value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <LoginLabel>{registrationData.password}</LoginLabel>
+          <label>{registrationData.password}</label>
         </UserBox>
-        <ErrorMessage>{error}</ErrorMessage>
+        <div className="errorMessage">{errorMessage}</div>
         <SubmitBox type="submit" value="Submit" />
       </form>
       <div style={{ display: successDisplay }}>
         {registrationData.successText}
       </div>
-      <Link to="/Login">
-        <LoginLink>{registrationData.linkText}</LoginLink>
+      <Link className="pageLink" to="/Login">
+        {registrationData.linkText}
       </Link>
-    </LoginBox>
+    </UserFormBox>
   );
 };
 
