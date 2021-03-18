@@ -6,12 +6,11 @@ const {
   UserInputError,
   AuthenticationError,
 } = require("apollo-server-express");
-const jwt = require("jsonwebtoken");
+const createTokens = require("../authorisation/auth");
 
 const resolvers = {
   Query: {
     users: (_, __, { req }) => {
-      console.log(req);
       if (!req.userId) throw new AuthenticationError("incorrect credentials");
       return User.find();
     },
@@ -44,17 +43,9 @@ const resolvers = {
         user.password
       );
       if (!validPass) throw new UserInputError("Email or password incorrect");
+      console.log("resolver= ", user);
 
-      const accessToken = jwt.sign(
-        { userId: user.id },
-        process.env.TOKEN_SECRET,
-        { expiresIn: "15m" }
-      );
-      const refreshToken = jwt.sign(
-        { userId: user.id, count: user.count },
-        process.env.TOKEN_SECRET,
-        { expiresIn: "7d" }
-      );
+      const { accessToken, refreshToken } = createTokens(user);
 
       res.cookie("refresh-token", refreshToken);
       res.cookie("access-token", accessToken);
