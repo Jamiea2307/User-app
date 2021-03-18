@@ -4,6 +4,8 @@ const { ApolloServer } = require("apollo-server-express");
 const typeDefs = require("./schema/schema");
 const resolvers = require("./resolvers/resolvers");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 
@@ -21,7 +23,31 @@ db.on("error", (error) => console.error(error));
 // const indexRoute = require("./routes/index");
 // const userRoute = require("./routes/users");
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req, res }) => ({ req, res }),
+});
+
+app.use(cookieParser());
+
+app.use((req, _, next) => {
+  const accessToken = req.cookies["access-token"];
+  const refreshToken = req.cookies["refresh-token"];
+  if (!accessToken && !refreshToken) {
+    return next();
+  }
+  try {
+    const data = jwt.verify(accessToken, process.env.TOKEN_SECRET);
+    req.userId = data.userId;
+    return next();
+  } catch {}
+
+  if (!refreshToken) {
+    return next();
+  }
+  next();
+});
 
 server.applyMiddleware({ app });
 

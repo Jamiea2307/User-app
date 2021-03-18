@@ -2,12 +2,19 @@ const bcrypt = require("bcrypt");
 const { registerValidation } = require("../validation/Register");
 const { loginValidation } = require("../validation/Login");
 const User = require("../model/User");
-const { UserInputError } = require("apollo-server-express");
+const {
+  UserInputError,
+  AuthenticationError,
+} = require("apollo-server-express");
 const jwt = require("jsonwebtoken");
 
 const resolvers = {
   Query: {
-    users: () => User.find(),
+    users: (_, __, { req }) => {
+      console.log(req);
+      if (!req.userId) throw new AuthenticationError("incorrect credentials");
+      return User.find();
+    },
   },
   Mutation: {
     createUser: async (__, details) => {
@@ -22,11 +29,10 @@ const resolvers = {
 
       const user = new User(details);
       await user.save();
-      console.log("user = ", user);
+
       return user;
     },
-    loginUser: async (__, userDetails) => {
-      console.log(userDetails);
+    loginUser: async (__, userDetails, { req, res }) => {
       const { error } = loginValidation(userDetails);
       if (error) throw new UserInputError(error.message);
 
@@ -39,10 +45,21 @@ const resolvers = {
       );
       if (!validPass) throw new UserInputError("Email or password incorrect");
 
-      return user;
+      const accessToken = jwt.sign(
+        { userId: user.id },
+        process.env.TOKEN_SECRET,
+        { expiresIn: "15m" }
+      );
+      const refreshToken = jwt.sign(
+        { userId: user.id, count: user.count },
+        process.env.TOKEN_SECRET,
+        { expiresIn: "7d" }
+      );
 
-      // const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-      // res.header("auth-token", token).send(token);
+      res.cookie("refresh-token", refreshToken);
+      res.cookie("access-token", accessToken);
+
+      return user;
     },
   },
 };
