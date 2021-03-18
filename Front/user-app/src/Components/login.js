@@ -8,7 +8,8 @@ import { Link, useHistory } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const { loading, error, data } = useQuery(GET_USERS);
 
   let history = useHistory();
   const getUser = () => {};
