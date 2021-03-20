@@ -4,5 +4,5 @@ export const registrationData = {
   email: "Email:",
   password: "Password:",
   linkText: "Login",
-  successText: "Thank you for registering!",
+  successText: "Thank you for registering! Please login",
 };

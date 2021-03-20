@@ -14,6 +14,10 @@ const resolvers = {
       Verify(req);
       return User.find();
     },
+    user: (_, __, { req }) => {
+      Verify(req);
+      return User.findOne({ _id: req.userId });
+    },
   },
   Mutation: {
     createUser: async (__, details) => {
