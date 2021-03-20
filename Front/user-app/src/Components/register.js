@@ -42,9 +42,6 @@ const Register = () => {
         className="registrationForm"
         onSubmit={(e) => {
           e.preventDefault();
-          if (name === "" || email === "" || password === "") {
-            return;
-          }
           submitUser();
         }}
       >

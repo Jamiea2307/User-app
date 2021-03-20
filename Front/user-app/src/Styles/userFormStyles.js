@@ -9,10 +9,11 @@ export const UserFormBox = styled.div`
   padding: 40px;
   transform: translate(-50%, -50%);
   box-sizing: border-box;
-  border: 1px solid;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: #fff;
 
-  @media only screen and (max-device-width: 600px) {
+  @media only screen and (max-device-width: 676px) {
     border-radius: 0%;
     height: 100%;
     width: 100%;
