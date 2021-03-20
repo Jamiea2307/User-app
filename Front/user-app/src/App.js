@@ -4,7 +4,7 @@ import {
   InMemoryCache,
   createHttpLink,
 } from "@apollo/client";
-import { Routes } from "./routes";
+import { Routes } from "./Routes/routes";
 
 const link = createHttpLink({
   uri: "http://localhost:4000/graphql",

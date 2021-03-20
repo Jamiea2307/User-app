@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { UserFormBox, UserBox, SubmitBox } from "../Styles/userFormStyles";
 import { LOGIN_USERS } from "../Mutations/login";
 import { loginData } from "../Constants/login";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
