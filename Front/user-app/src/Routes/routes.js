@@ -7,7 +7,7 @@ export const Routes = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/login" component={Login} />
+        <Route exact path={["/login", "/"]} component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/User" component={UserData} />
       </Switch>
