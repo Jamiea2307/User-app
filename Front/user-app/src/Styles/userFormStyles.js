@@ -56,6 +56,13 @@ export const SubmitBox = styled.input`
     color: #fff;
     border: 2px solid white;
   }
+
+  &:active {
+    cursor: pointer;
+    background: #fff;
+    color: #21595c;
+    border: 2px solid white;
+  }
 `;
 
 export const UserBox = styled.div`

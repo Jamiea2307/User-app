@@ -11,7 +11,7 @@ const createTokens = require("../authorisation/auth");
 const resolvers = {
   Query: {
     users: (_, __, { req }) => {
-      if (!req.userId) throw new AuthenticationError("incorrect credentials");
+      Verify(req);
       return User.find();
     },
   },
@@ -33,17 +33,17 @@ const resolvers = {
     },
     loginUser: async (__, userDetails, { req, res }) => {
       const { error } = loginValidation(userDetails);
-      if (error) throw new UserInputError(error.message);
+      console.log(error);
+      if (error) return new UserInputError(error.message);
 
       const user = await User.findOne({ email: userDetails.email });
-      if (!user) throw new UserInputError("Email or password Incorrect");
+      if (!user) return new UserInputError("Email or password Incorrect");
 
       const validPass = await bcrypt.compare(
         userDetails.password,
         user.password
       );
-      if (!validPass) throw new UserInputError("Email or password incorrect");
-      console.log("resolver= ", user);
+      if (!validPass) return new UserInputError("Email or password incorrect");
 
       const { accessToken, refreshToken } = createTokens(user);
 
@@ -52,7 +52,19 @@ const resolvers = {
 
       return user;
     },
+    invalidateTokens: async (_, __, { req }) => {
+      Verify(req);
+
+      await User.updateOne({ _id: req.userId }, { $inc: { count: 1 } });
+      if (!req.userId) return false;
+
+      return true;
+    },
   },
+};
+
+const Verify = (req) => {
+  if (!req.userId) throw new AuthenticationError("incorrect credentials");
 };
 
 module.exports = resolvers;

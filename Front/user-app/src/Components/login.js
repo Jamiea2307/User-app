@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { UserFormBox, UserBox, SubmitBox } from "../Styles/userFormStyles";
-import { GET_USERS } from "../Queries/login";
+import { LOGIN_USERS } from "../Mutations/login";
 import { loginData } from "../Constants/login";
 import { Link, useHistory } from "react-router-dom";
 
@@ -9,15 +9,32 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { loading, error, data } = useQuery(GET_USERS);
+  const [loginUser] = useMutation(LOGIN_USERS);
 
-  let history = useHistory();
-  const getUser = () => {};
-
+  const submitUser = async () => {
+    try {
+      await loginUser({
+        variables: {
+          email: email,
+          password: password,
+        },
+      });
+      setErrorMessage();
+    } catch (err) {
+      setErrorMessage(err.message);
+    }
+  };
   return (
     <UserFormBox>
       <h2>{loginData.title}</h2>
-      <form className="login-form" onSubmit={getUser}>
+      <form
+        className="login-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          submitUser();
+          // getUser;
+        }}
+      >
         <UserBox className="user-box">
           <input
             className="login-input"
@@ -35,7 +52,7 @@ const Login = () => {
           />
           <label>{loginData.password}</label>
         </UserBox>
-        <div className="errorMessage">{}</div>
+        <div className="errorMessage">{errorMessage}</div>
         <SubmitBox type="submit" value="Submit" />
       </form>
       <Link className="pageLink" to="/Register">
