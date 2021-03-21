@@ -7,6 +7,7 @@ const {
   AuthenticationError,
 } = require("apollo-server-express");
 const createTokens = require("../authorisation/auth");
+const Verify = require("../authorisation/verification");
 
 const resolvers = {
   Query: {
@@ -37,7 +38,6 @@ const resolvers = {
     },
     loginUser: async (__, userDetails, { req, res }) => {
       const { error } = loginValidation(userDetails);
-      console.log(error);
       if (error) return new UserInputError(error.message);
 
       const user = await User.findOne({ email: userDetails.email });
@@ -56,19 +56,17 @@ const resolvers = {
 
       return user;
     },
-    invalidateTokens: async (_, __, { req }) => {
+    invalidateTokens: async (_, __, { res, req }) => {
       Verify(req);
 
       await User.updateOne({ _id: req.userId }, { $inc: { count: 1 } });
       if (!req.userId) return false;
 
+      res.clearCookie("access-token");
+
       return true;
     },
   },
-};
-
-const Verify = (req) => {
-  if (!req.userId) throw new AuthenticationError("incorrect credentials");
 };
 
 module.exports = resolvers;
