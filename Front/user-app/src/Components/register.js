@@ -1,12 +1,14 @@
 import { useMutation } from "@apollo/client";
-
 import { CREATE_USER } from "../Mutations/register";
 import { useState } from "react";
 import { UserFormBox, UserBox, SubmitBox } from "../Styles/userFormStyles";
-import { registrationData } from "../Constants/registration";
+import { registrationData } from "../Constants/userContent";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import UserInput from "../Components/userInput";
 
 const Register = () => {
+  const history = useHistory();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,21 +46,21 @@ const Register = () => {
         }}
       >
         <h2>{registrationData.title}</h2>
-        <UserBox>
-          <input type="text" onChange={(e) => setName(e.target.value)} />
-          <label>{registrationData.name} </label>
-        </UserBox>
-        <UserBox>
-          <input type="text" onChange={(e) => setEmail(e.target.value)} />
-          <label>{registrationData.email} </label>
-        </UserBox>
-        <UserBox>
-          <input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label>{registrationData.password}</label>
-        </UserBox>
+        <UserInput
+          loginData={registrationData.name}
+          setValue={setName}
+          type="text"
+        />
+        <UserInput
+          loginData={registrationData.email}
+          setValue={setEmail}
+          type="text"
+        />
+        <UserInput
+          loginData={registrationData.password}
+          setValue={setPassword}
+          type="password"
+        />
         <div className="errorMessage">{errorMessage}</div>
         <SubmitBox type="submit" value="Submit" />
       </form>

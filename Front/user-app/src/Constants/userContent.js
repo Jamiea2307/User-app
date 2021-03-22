@@ -1,3 +1,10 @@
+export const loginData = {
+  title: "Login",
+  email: "Email:",
+  password: "Password:",
+  linkText: "Register",
+};
+
 export const registrationData = {
   title: "Register",
   name: "Name:",

@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { UserFormBox, UserBox, SubmitBox } from "../Styles/userFormStyles";
+import { UserFormBox, SubmitBox } from "../Styles/userFormStyles";
 import { LOGIN_USERS } from "../Mutations/login";
-import { loginData } from "../Constants/login";
+import { loginData } from "../Constants/userContent";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import UserInput from "../Components/userInput";
 
 const Login = () => {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -20,6 +23,7 @@ const Login = () => {
         },
       });
       setErrorMessage();
+      history.push("/user");
     } catch (err) {
       setErrorMessage(err.message);
     }
@@ -32,26 +36,18 @@ const Login = () => {
         onSubmit={(e) => {
           e.preventDefault();
           submitUser();
-          // getUser;
         }}
       >
-        <UserBox className="user-box">
-          <input
-            className="login-input"
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label>{loginData.email} </label>
-        </UserBox>
-        <UserBox>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label>{loginData.password}</label>
-        </UserBox>
+        <UserInput
+          loginData={loginData.email}
+          setValue={setEmail}
+          type="text"
+        />
+        <UserInput
+          loginData={loginData.password}
+          setValue={setPassword}
+          type="password"
+        />
         <div className="errorMessage">{errorMessage}</div>
         <SubmitBox type="submit" value="Submit" />
       </form>
