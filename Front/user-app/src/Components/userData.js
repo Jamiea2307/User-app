@@ -1,16 +1,20 @@
+import { useContext } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_USER } from "../Queries/users";
+import { UserContext } from "../Routes/routes";
+
 import { LOGOUT_USER } from "../Mutations/logout";
 import LoginRegisterPrompt from "../Components/loginRegisterPrompt";
 import { useHistory } from "react-router-dom";
 
 const UserData = () => {
-  const { loading, error, data } = useQuery(GET_USER);
   const [invalidateTokens] = useMutation(LOGOUT_USER);
   const history = useHistory();
+  const { data, loading } = useContext(UserContext);
+  console.log(data);
+  console.log(loading);
 
   if (loading) return <p>Loading ...</p>;
-  if (error) return <LoginRegisterPrompt />;
+  if (!data.user) return <LoginRegisterPrompt />;
 
   const logout = async () => {
     await invalidateTokens();
