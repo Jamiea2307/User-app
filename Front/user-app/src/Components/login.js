@@ -23,7 +23,6 @@ const Login = () => {
           password: password,
         },
       });
-      setErrorMessage();
       history.push("/user");
     } catch (err) {
       setErrorMessage(err.message);

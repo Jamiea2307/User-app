@@ -33,7 +33,7 @@ const resolvers = {
 
       return user;
     },
-    loginUser: async (__, userDetails, { req, res }) => {
+    loginUser: async (__, userDetails, { res }) => {
       const { error } = loginValidation(userDetails);
       if (error) return new UserInputError(error.message);
 

@@ -4,17 +4,14 @@ import { useState } from "react";
 import { UserFormBox, SubmitBox } from "../Styles/userFormStyles";
 import { registrationData } from "../Constants/userContent";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import RegisterGratitude from "../Components/registerGratitude";
 import UserInput from "../Components/userInput";
 
 const Register = () => {
-  const history = useHistory();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [formDisplay, setFormDisplay] = useState("hidden");
-  const [successDisplay, setSuccessDisplay] = useState("none");
   const [createUser, { data }] = useMutation(CREATE_USER);
 
   const submitUser = async () => {
@@ -26,19 +23,14 @@ const Register = () => {
           password: password,
         },
       });
-      if (data) {
-        setFormDisplay("none");
-        setSuccessDisplay("block");
-      }
     } catch (err) {
       setErrorMessage(err.message);
     }
   };
 
-  return (
+  return !data ? (
     <UserFormBox>
       <form
-        style={{ display: formDisplay }}
         className="registrationForm"
         onSubmit={(e) => {
           e.preventDefault();
@@ -64,12 +56,13 @@ const Register = () => {
         <div className="errorMessage">{errorMessage}</div>
         <SubmitBox type="submit" value="Submit" />
       </form>
-      <div style={{ display: successDisplay }}>
-        {registrationData.successText}
-      </div>
       <Link className="pageLink" to="/Login">
         {registrationData.linkText}
       </Link>
+    </UserFormBox>
+  ) : (
+    <UserFormBox>
+      <RegisterGratitude />
     </UserFormBox>
   );
 };
