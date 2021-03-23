@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { createContext } from "react";
 import { GET_USER } from "../Queries/users";
@@ -12,7 +12,6 @@ export const UserContext = createContext();
 
 export const Routes = () => {
   const data = useQuery(GET_USER);
-  console.log(data);
 
   return (
     <Router>

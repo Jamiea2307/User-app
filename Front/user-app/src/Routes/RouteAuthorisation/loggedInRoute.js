@@ -1,10 +1,12 @@
 import { Route, Redirect } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../routes";
+import LoadingSpinner from "../../Components/Widgets/loadingSpinner";
 
 const LoggedInRoute = ({ children, ...rest }) => {
-  const { data } = useContext(UserContext);
-  console.log(data);
+  const { data, loading } = useContext(UserContext);
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <Route
