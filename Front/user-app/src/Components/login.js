@@ -6,7 +6,6 @@ import { loginData } from "../Constants/userContent";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import UserInput from "../Components/userInput";
-import LoggedInMessage from "../Components/loggedInMessage";
 
 const Login = () => {
   const history = useHistory();
@@ -54,7 +53,6 @@ const Login = () => {
       <Link className="pageLink" to="/Register">
         {loginData.linkText}
       </Link>
-      <LoggedInMessage />
     </UserFormBox>
   );
 };

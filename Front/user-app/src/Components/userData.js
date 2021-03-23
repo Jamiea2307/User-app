@@ -10,8 +10,8 @@ const UserData = () => {
   const history = useHistory();
   const { data, loading } = useContext(UserContext);
 
-  if (loading) return <p>Loading ...</p>;
-  if (!data.user) return <LoginRegisterPrompt />;
+  // if (loading) return <p>Loading ...</p>;
+  // if (!data.user) return <LoginRegisterPrompt />;
 
   const logout = async () => {
     await invalidateTokens();

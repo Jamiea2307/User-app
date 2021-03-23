@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "../Mutations/register";
-import { useState } from "react";
 import { UserFormBox, SubmitBox } from "../Styles/userFormStyles";
 import { registrationData } from "../Constants/userContent";
 import { Link } from "react-router-dom";
