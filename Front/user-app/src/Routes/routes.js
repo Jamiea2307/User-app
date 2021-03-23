@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { createContext } from "react";
 import { GET_USER } from "../Queries/users";
-import Login from "../Components/login";
-import Register from "../Components/register";
+import Login from "../Components/userEntry/login";
+import Register from "../Components/userEntry/register";
 import UserData from "../Components/userData";
 import PrivateRoute from "./RouteAuthorisation/privateRoute";
 import LoggedInRoute from "./RouteAuthorisation/loggedInRoute";

@@ -1,4 +1,4 @@
-import { UserBox } from "../Styles/userFormStyles";
+import { UserBox } from "../../Styles/userFormStyles";
 
 const UserInput = (props) => {
   const { loginData, setValue, type } = props;

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { UserFormBox, SubmitBox } from "../Styles/userFormStyles";
-import { LOGIN_USERS } from "../Mutations/login";
-import { loginData } from "../Constants/userContent";
+import { UserFormBox, SubmitBox } from "../../Styles/userFormStyles";
+import { LOGIN_USERS } from "../../Mutations/login";
+import { loginData } from "../../Constants/userContent";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import UserInput from "../Components/userInput";
+import UserInput from "../Widgets/userInput";
 
 const Login = () => {
   const history = useHistory();

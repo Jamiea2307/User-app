@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { LoginRegisterPromptContainer } from "../Styles/loginRegisterPromptStyles";
+import { LoginRegisterPromptContainer } from "../../Styles/loginRegisterPromptStyles";
 
 const LoginRegisterPrompt = () => {
   return (

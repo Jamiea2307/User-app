@@ -1,10 +1,10 @@
 const bcrypt = require("bcrypt");
 const { registerValidation } = require("../validation/Register");
 const { loginValidation } = require("../validation/Login");
-const User = require("../model/User");
 const { UserInputError } = require("apollo-server-express");
 const createTokens = require("../authorisation/auth");
 const Verify = require("../authorisation/verification");
+const User = require("../model/User");
 
 const resolvers = {
   Query: {
