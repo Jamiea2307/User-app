@@ -53,13 +53,24 @@ const resolvers = {
 
       return user;
     },
-    invalidateTokens: async (_, __, { res, req }) => {
-      Verify(req);
+    invalidateTokens: async (_, __, { req }) => {
+      if (!req.userId) {
+        return false;
+      }
 
       await User.updateOne({ _id: req.userId }, { $inc: { count: 1 } });
+
+      // await user.save();
+
+      return true;
+    },
+    logoutUser: async (_, __, { res, req }) => {
+      Verify(req);
+
       if (!req.userId) return false;
 
       res.clearCookie("access-token");
+      res.clearCookie("refresh-token");
 
       return true;
     },
