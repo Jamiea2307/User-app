@@ -5,6 +5,7 @@ const { UserInputError } = require("apollo-server-express");
 const createTokens = require("../authorisation/auth");
 const Verify = require("../authorisation/verification");
 const User = require("../model/User");
+const Post = require("../model/Post");
 
 const resolvers = {
   Query: {
@@ -71,6 +72,13 @@ const resolvers = {
 
       res.clearCookie("access-token");
       res.clearCookie("refresh-token");
+
+      return true;
+    },
+    createPost: async (_, __, { res, req }) => {
+      Verify(req);
+
+      console.log(req);
 
       return true;
     },

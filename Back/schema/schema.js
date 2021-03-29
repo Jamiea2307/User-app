@@ -17,6 +17,7 @@ const typeDefs = gql`
     loginUser(email: String!, password: String!): User!
     logoutUser: Boolean!
     invalidateTokens: Boolean!
+    createPost(content: String!): Boolean!
   }
 `;
 
