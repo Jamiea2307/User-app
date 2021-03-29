@@ -6,6 +6,7 @@ const CreatePostContainer = styled.div`
   border-radius: 0.5rem;
   width: auto;
   height: 10rem;
+  background: #fff;
 `;
 
 const PostForm = styled.form``;
