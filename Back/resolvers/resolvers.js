@@ -75,10 +75,12 @@ const resolvers = {
 
       return true;
     },
-    createPost: async (_, __, { res, req }) => {
+    createPost: async (__, details, { res, req }) => {
       Verify(req);
 
-      console.log(req);
+      const post = new Post(details);
+      post.save();
+      console.log(details.content);
 
       return true;
     },

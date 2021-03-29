@@ -17,8 +17,17 @@ const CreatePost = () => {
   const [postContent, setPostContent] = useState("");
   const [createPost] = useMutation(CREATE_POST);
 
-  const createNewPost = (e) => {
+  const createNewPost = async () => {
     console.log(postContent);
+    try {
+      await createPost({
+        variables: {
+          content: postContent,
+        },
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
