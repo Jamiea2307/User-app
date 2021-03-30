@@ -22,7 +22,7 @@ const Login = () => {
           password: password,
         },
       });
-      history.push("/user");
+      history.push("/home");
     } catch (err) {
       setErrorMessage(err.message);
     }

@@ -19,6 +19,27 @@ const resolvers = {
     },
   },
   Mutation: {
+    createPost: async (__, details, { res, req }) => {
+      console.log("here");
+      Verify(req);
+
+      const user = await User.findOne({ _id: req.userId });
+
+      await user.save((err) => {
+        if (err) return console.log(err);
+
+        const post = new Post({
+          author: req.userId,
+          content: details.content,
+        });
+
+        post.save((err) => {
+          if (err) return console.log(err);
+        });
+      });
+
+      return true;
+    },
     createUser: async (__, details) => {
       const { error } = registerValidation(details);
       if (error) throw new UserInputError(error.message);
@@ -72,30 +93,6 @@ const resolvers = {
 
       res.clearCookie("access-token");
       res.clearCookie("refresh-token");
-
-      return true;
-    },
-    createPost: async (__, details, { res, req }) => {
-      Verify(req);
-
-      // const post = new Post(details);
-      // post.save();
-      // console.log(details.content);
-
-      const user = await User.findOne({ _id: req.userId });
-
-      await user.save((err) => {
-        if (err) return console.log(err);
-
-        const post = new Post({
-          author: req.userId,
-          content: details.content,
-        });
-
-        post.save((err) => {
-          if (err) return console.log(err);
-        });
-      });
 
       return true;
     },
