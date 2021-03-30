@@ -78,9 +78,24 @@ const resolvers = {
     createPost: async (__, details, { res, req }) => {
       Verify(req);
 
-      const post = new Post(details);
-      post.save();
-      console.log(details.content);
+      // const post = new Post(details);
+      // post.save();
+      // console.log(details.content);
+
+      const user = await User.findOne({ _id: req.userId });
+
+      await user.save((err) => {
+        if (err) return console.log(err);
+
+        const post = new Post({
+          author: req.userId,
+          content: details.content,
+        });
+
+        post.save((err) => {
+          if (err) return console.log(err);
+        });
+      });
 
       return true;
     },
