@@ -1,17 +1,7 @@
 import { useState } from "react";
-import styled from "styled-components";
-import { CREATE_POST } from "../Mutations/createPost";
+import { CREATE_POST } from "../../Mutations/createPost";
 import { useMutation } from "@apollo/client";
-
-const CreatePostContainer = styled.div`
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  width: auto;
-  height: 10rem;
-  background: #fff;
-`;
-
-const PostForm = styled.form``;
+import { CreatePostContainer, PostForm } from "../../Styles/createPosts";
 
 const CreatePost = () => {
   const [postContent, setPostContent] = useState("");
