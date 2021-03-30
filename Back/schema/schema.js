@@ -4,6 +4,13 @@ const typeDefs = gql`
   type Query {
     users: [User!]!
     user: User!
+    posts: [Post]
+  }
+
+  type Post {
+    name: String!
+    content: String!
+    date: String!
   }
 
   type User {

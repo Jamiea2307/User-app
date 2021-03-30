@@ -17,6 +17,24 @@ const resolvers = {
       Verify(req);
       return User.findOne({ _id: req.userId });
     },
+    posts: async (_, __, { req }) => {
+      Verify(req);
+
+      const posts = await Post.find().populate({
+        path: "author",
+        select: "name",
+      });
+
+      const sortedPosts = posts.map((post) => {
+        return {
+          name: post.author.name,
+          content: post.content,
+          date: post.dateAdded.toISOString(),
+        };
+      });
+
+      return sortedPosts;
+    },
   },
   Mutation: {
     createUser: async (__, details) => {

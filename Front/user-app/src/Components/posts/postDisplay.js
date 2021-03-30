@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { GET_POSTS } from "../../Queries/posts";
+import { useQuery } from "@apollo/client";
 
 const DisplayContainer = styled.div`
   border: 1px solid black;
@@ -8,6 +10,10 @@ const DisplayContainer = styled.div`
 `;
 
 const PostDisplay = () => {
+  const posts = useQuery(GET_POSTS);
+
+  console.log(posts.data.posts);
+
   return <DisplayContainer></DisplayContainer>;
 };
 
