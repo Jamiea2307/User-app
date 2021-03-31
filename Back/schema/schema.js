@@ -5,6 +5,8 @@ const typeDefs = gql`
     users: [User!]!
     user: User!
     posts: [Post]
+    comments: Boolean!
+    getUserPosts: Boolean!
   }
 
   type Post {
@@ -25,6 +27,7 @@ const typeDefs = gql`
     createPost(content: String!): Boolean!
     logoutUser: Boolean!
     invalidateTokens: Boolean!
+    createComment(content: String!): Boolean!
   }
 `;
 

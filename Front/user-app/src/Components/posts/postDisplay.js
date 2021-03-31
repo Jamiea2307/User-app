@@ -4,17 +4,32 @@ import { useQuery } from "@apollo/client";
 
 const DisplayContainer = styled.div`
   border: 1px solid black;
-  height: 1rem;
   margin-top: 1rem;
   background: #fff;
 `;
 
+const PostContainer = styled.div`
+  border: 1px solid black;
+  margin: 1.5rem 1rem;
+`;
+
 const PostDisplay = () => {
-  const posts = useQuery(GET_POSTS);
+  const { loading, data } = useQuery(GET_POSTS);
 
-  console.log(posts.data.posts);
+  if (loading) return <div>Loading</div>;
 
-  return <DisplayContainer></DisplayContainer>;
+  return (
+    <DisplayContainer>
+      {data.posts.map((post) => (
+        <PostContainer>
+          <div>
+            {post.name} {post.date}
+          </div>
+          <div>{post.content}</div>
+        </PostContainer>
+      ))}
+    </DisplayContainer>
+  );
 };
 
 export default PostDisplay;

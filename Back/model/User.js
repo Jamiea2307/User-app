@@ -7,7 +7,6 @@ const userSchema = schema({
   password: { type: String, required: true },
   count: { type: Number, required: false, default: 0 },
   dateAdded: { type: Date, default: Date.now },
-  posts: [{ type: schema.Types.ObjectId, ref: "Post" }],
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -6,6 +6,7 @@ const createTokens = require("../authorisation/auth");
 const Verify = require("../authorisation/verification");
 const User = require("../model/User");
 const Post = require("../model/Post");
+const Comments = require("../model/Comment");
 
 const resolvers = {
   Query: {
@@ -34,6 +35,22 @@ const resolvers = {
       });
 
       return sortedPosts;
+    },
+    getUserPosts: async (_, __, { req }) => {
+      Verify(req);
+
+      const user = await User.findOne({ _id: req.userId });
+
+      console.log(user);
+
+      return true;
+    },
+    comments: async (_, __, { req }) => {
+      Verify(req);
+
+      // console.log(Comments.find());
+
+      return true;
     },
   },
   Mutation: {
@@ -93,7 +110,7 @@ const resolvers = {
 
       return true;
     },
-    createPost: async (__, details, { res, req }) => {
+    createPost: async (__, details, { req }) => {
       Verify(req);
 
       const user = await User.findOne({ _id: req.userId });
@@ -111,7 +128,12 @@ const resolvers = {
         });
       });
 
+      console.log(user);
+
       return true;
+    },
+    createComment: async (__, details, { req }) => {
+      Verify(req);
     },
   },
 };
