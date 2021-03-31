@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { GET_POSTS } from "../../Queries/posts";
 import { useQuery } from "@apollo/client";
+import Comment from "../posts/comments";
 
 const DisplayContainer = styled.div`
   border: 1px solid black;
@@ -26,6 +27,7 @@ const PostDisplay = () => {
             {post.name} {post.date}
           </div>
           <div>{post.content}</div>
+          <Comment />
         </PostContainer>
       ))}
     </DisplayContainer>

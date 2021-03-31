@@ -39,9 +39,9 @@ const resolvers = {
     getUserPosts: async (_, __, { req }) => {
       Verify(req);
 
-      const user = await User.findOne({ _id: req.userId });
+      const post = await Post.find({ author: req.userId });
 
-      console.log(user);
+      // sort and return when you've added comments
 
       return true;
     },
