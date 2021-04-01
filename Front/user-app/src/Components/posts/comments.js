@@ -18,6 +18,7 @@ const CommentArea = styled.form`
 const CommentTextArea = styled.textarea`
   height: 5rem;
   width: 25rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 `;
 
 const CommentControls = styled.div`

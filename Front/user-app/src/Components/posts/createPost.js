@@ -1,40 +1,76 @@
 import { useState } from "react";
 import { CREATE_POST } from "../../Mutations/createPost";
 import { useMutation } from "@apollo/client";
-import { CreatePostContainer, PostForm } from "../../Styles/createPosts";
+import {
+  CreatePostContainer,
+  PostForm,
+  PostTextArea,
+} from "../../Styles/createPosts";
 
 const CreatePost = () => {
   const [postContent, setPostContent] = useState("");
   const [createPost] = useMutation(CREATE_POST);
+  const [addPost, setAddPost] = useState(false);
 
   const createNewPost = async () => {
-    console.log(postContent);
     try {
       await createPost({
         variables: {
           content: postContent,
         },
       });
+      setAddPost(false);
     } catch (err) {
       console.log(err.message);
     }
   };
 
-  return (
+  return addPost ? (
     <CreatePostContainer>
       <PostForm>
-        <input onChange={(e) => setPostContent(e.target.value)} />
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            createNewPost(e);
-          }}
-        >
-          Submit
-        </button>
+        <PostTextArea onChange={(e) => setPostContent(e.target.value)} />
+        <div>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              createNewPost(e);
+            }}
+          >
+            Submit
+          </button>
+        </div>
       </PostForm>
     </CreatePostContainer>
+  ) : (
+    <CreatePostContainer>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          setAddPost(true);
+        }}
+      >
+        Create Post
+      </button>
+    </CreatePostContainer>
   );
+
+  // return (
+  //   <CreatePostContainer>
+  //     <PostForm>
+  //       <PostTextArea onChange={(e) => setPostContent(e.target.value)} />
+  //       <div>
+  //         <button
+  //           onClick={(e) => {
+  //             e.preventDefault();
+  //             createNewPost(e);
+  //           }}
+  //         >
+  //           Submit
+  //         </button>
+  //       </div>
+  //     </PostForm>
+  //   </CreatePostContainer>
+  // );
 };
 
 export default CreatePost;

@@ -4,8 +4,19 @@ export const CreatePostContainer = styled.div`
   border: 1px solid black;
   border-radius: 0.5rem;
   width: auto;
-  height: 10rem;
   background: #fff;
+  padding: 1rem;
 `;
 
-export const PostForm = styled.form``;
+export const PostForm = styled.form`
+  width: 90%;
+`;
+
+export const PostTextArea = styled.textarea`
+  height: 5rem;
+  width: 45rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border: 3px solid #cccccc;
+  resize: vertical;
+  overflow: auto;
+`;
