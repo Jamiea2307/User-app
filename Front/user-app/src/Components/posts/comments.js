@@ -1,6 +1,7 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-const CommentButton = styled.button`
+const ReplyButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
@@ -9,18 +10,50 @@ const CommentButton = styled.button`
   padding: 0;
 `;
 
-const Comment = () => {
-  const addComment = () => {};
+const CommentArea = styled.form`
+  border: 1px solid red;
+  width: 30rem;
+`;
 
-  return (
-    <CommentButton
+const CommentTextArea = styled.textarea`
+  height: 5rem;
+  width: 25rem;
+`;
+
+const CommentControls = styled.div`
+  display: flex;
+`;
+
+const CommentButton = styled.button`
+  align-items: right;
+`;
+
+const Comment = () => {
+  const [addComment, setAddComment] = useState(false);
+
+  return addComment ? (
+    <CommentArea>
+      <CommentTextArea />
+      <CommentControls>
+        <CommentButton
+          onClick={(e) => {
+            e.preventDefault();
+            setAddComment(false);
+          }}
+        >
+          save
+        </CommentButton>
+      </CommentControls>
+    </CommentArea>
+  ) : (
+    <ReplyButton
       onClick={(e) => {
         e.preventDefault();
-        addComment();
+        setAddComment(true);
       }}
     >
       Reply
-    </CommentButton>
+    </ReplyButton>
   );
 };
 
