@@ -1,33 +1,12 @@
 import { useState } from "react";
-import styled from "styled-components";
-
-const ReplyButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 0.7rem;
-  color: grey;
-  padding: 0;
-`;
-
-const CommentArea = styled.form`
-  border: 1px solid red;
-  width: 30rem;
-`;
-
-const CommentTextArea = styled.textarea`
-  height: 5rem;
-  width: 25rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-`;
-
-const CommentControls = styled.div`
-  display: flex;
-`;
-
-const CommentButton = styled.button`
-  align-items: right;
-`;
+import {
+  CommentArea,
+  CommentTextArea,
+  CommentControls,
+  SubmitButton,
+  CancelButton,
+  ReplyButton,
+} from "../../Styles/comments";
 
 const Comment = () => {
   const [addComment, setAddComment] = useState(false);
@@ -36,14 +15,22 @@ const Comment = () => {
     <CommentArea>
       <CommentTextArea />
       <CommentControls>
-        <CommentButton
+        <SubmitButton
           onClick={(e) => {
             e.preventDefault();
             setAddComment(false);
           }}
         >
-          save
-        </CommentButton>
+          Submit
+        </SubmitButton>
+        <CancelButton
+          onClick={(e) => {
+            e.preventDefault();
+            setAddComment(false);
+          }}
+        >
+          Cancel
+        </CancelButton>
       </CommentControls>
     </CommentArea>
   ) : (

@@ -10,8 +10,9 @@ const DisplayContainer = styled.div`
 `;
 
 const PostContainer = styled.div`
-  border: 1px solid black;
+  border-left: 1px solid black;
   margin: 1.5rem 1rem;
+  padding: 1rem;
 `;
 
 const PostDisplay = () => {

@@ -1,5 +1,5 @@
 import CreatePost from "./posts/createPost";
-import { Homepage } from "../Styles/homeStyles";
+import { Homepage } from "../Styles/home";
 import PostDisplay from "./posts/postDisplay";
 
 const HomePage = () => {
