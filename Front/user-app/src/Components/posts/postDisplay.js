@@ -23,7 +23,7 @@ const PostDisplay = () => {
   return (
     <DisplayContainer>
       {data.posts.map((post) => (
-        <PostContainer>
+        <PostContainer key={post.id}>
           <div>
             {post.name} {post.date}
           </div>

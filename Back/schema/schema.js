@@ -10,6 +10,7 @@ const typeDefs = gql`
   }
 
   type Post {
+    id: String!
     name: String!
     content: String!
     date: String!

@@ -28,6 +28,7 @@ const resolvers = {
 
       const sortedPosts = posts.map((post) => {
         return {
+          id: post.id,
           name: post.author.name,
           content: post.content,
           date: post.dateAdded.toISOString(),
@@ -127,8 +128,6 @@ const resolvers = {
           if (err) return console.log(err);
         });
       });
-
-      console.log(user);
 
       return true;
     },
