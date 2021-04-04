@@ -7,6 +7,10 @@ import {
   PostTextArea,
   CreatePostButton,
 } from "../../Styles/createPosts";
+import {
+  SubmitButton,
+  CancelButton,
+} from "../../Styles/StandardWidgets/buttons";
 
 const CreatePost = () => {
   const [postContent, setPostContent] = useState("");
@@ -33,14 +37,22 @@ const CreatePost = () => {
       <PostForm>
         <PostTextArea onChange={(e) => setPostContent(e.target.value)} />
         <div>
-          <button
+          <SubmitButton
             onClick={(e) => {
               e.preventDefault();
               createNewPost(e);
             }}
           >
             Submit
-          </button>
+          </SubmitButton>
+          <CancelButton
+            onClick={(e) => {
+              e.preventDefault();
+              setAddPost(false);
+            }}
+          >
+            Cancel
+          </CancelButton>
         </div>
       </PostForm>
     </CreatePostContainer>

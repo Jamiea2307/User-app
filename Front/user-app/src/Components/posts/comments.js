@@ -3,10 +3,12 @@ import {
   CommentArea,
   CommentTextArea,
   CommentControls,
-  SubmitButton,
-  CancelButton,
   ReplyButton,
 } from "../../Styles/comments";
+import {
+  SubmitButton,
+  CancelButton,
+} from "../../Styles/StandardWidgets/buttons";
 
 const Comment = () => {
   const [addComment, setAddComment] = useState(false);
