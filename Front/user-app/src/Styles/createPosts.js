@@ -20,3 +20,5 @@ export const PostTextArea = styled.textarea`
   resize: vertical;
   overflow: auto;
 `;
+
+export const CreatePostButton = styled.button``;

@@ -5,6 +5,7 @@ import {
   CreatePostContainer,
   PostForm,
   PostTextArea,
+  CreatePostButton,
 } from "../../Styles/createPosts";
 
 const CreatePost = () => {
@@ -45,34 +46,16 @@ const CreatePost = () => {
     </CreatePostContainer>
   ) : (
     <CreatePostContainer>
-      <button
+      <CreatePostButton
         onClick={(e) => {
           e.preventDefault();
           setAddPost(true);
         }}
       >
         Create Post
-      </button>
+      </CreatePostButton>
     </CreatePostContainer>
   );
-
-  // return (
-  //   <CreatePostContainer>
-  //     <PostForm>
-  //       <PostTextArea onChange={(e) => setPostContent(e.target.value)} />
-  //       <div>
-  //         <button
-  //           onClick={(e) => {
-  //             e.preventDefault();
-  //             createNewPost(e);
-  //           }}
-  //         >
-  //           Submit
-  //         </button>
-  //       </div>
-  //     </PostForm>
-  //   </CreatePostContainer>
-  // );
 };
 
 export default CreatePost;
