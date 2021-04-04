@@ -9,7 +9,7 @@ import {
 
 const CreatePost = () => {
   const [postContent, setPostContent] = useState("");
-  const [createPost] = useMutation(CREATE_POST);
+  const [createPost, { data }] = useMutation(CREATE_POST);
   const [addPost, setAddPost] = useState(false);
 
   const createNewPost = async () => {
@@ -19,7 +19,9 @@ const CreatePost = () => {
           content: postContent,
         },
       });
-      setAddPost(false);
+      if (data) {
+        setAddPost(false);
+      }
     } catch (err) {
       console.log(err.message);
     }
