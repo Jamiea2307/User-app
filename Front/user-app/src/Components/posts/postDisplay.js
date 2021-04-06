@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { GET_POSTS } from "../../Queries/posts";
 import { useQuery } from "@apollo/client";
+import DateFormatter from "../Widgets/dateFormatter";
 import Comment from "../posts/comments";
 
 const DisplayContainer = styled.div`
@@ -20,12 +21,15 @@ const PostDisplay = () => {
 
   if (loading) return <div>Loading</div>;
 
+  console.log(data);
+
   return (
     <DisplayContainer>
       {data.posts.map((post) => (
         <PostContainer key={post.id}>
           <div>
-            {post.name} {post.date}
+            {post.name}
+            <DateFormatter date={post.date} />
           </div>
           <div>{post.content}</div>
           <Comment />
