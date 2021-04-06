@@ -1,4 +1,4 @@
-import NavBarContainer from "../../Styles/navBarStyles";
+import { NavBarContainer, LogoutButton } from "../../Styles/navBarStyles";
 import { useContext } from "react";
 import { UserContext } from "../../Routes/routes";
 import { LOGOUT_USER } from "../../Mutations/logout";
@@ -17,14 +17,14 @@ const NavBar = () => {
 
   return (
     <NavBarContainer>
-      Welcome {data.user.name} !
-      <button
+      <div className="userName">{data.user.name}</div>
+      <LogoutButton
         onClick={() => {
           logout();
         }}
       >
         Logout
-      </button>
+      </LogoutButton>
     </NavBarContainer>
   );
 };

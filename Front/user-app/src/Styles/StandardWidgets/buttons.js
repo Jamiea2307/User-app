@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ButtonStandard = styled.button`
+export const ButtonStandard = styled.button`
   border-radius: 1rem;
   border: none;
   margin: 0.3rem;
