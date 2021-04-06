@@ -21,15 +21,12 @@ const PostDisplay = () => {
 
   if (loading) return <div>Loading</div>;
 
-  console.log(data);
-
   return (
     <DisplayContainer>
       {data.posts.map((post) => (
         <PostContainer key={post.id}>
           <div>
-            {post.name}
-            <DateFormatter date={post.date} />
+            {post.name} <DateFormatter date={post.date} />
           </div>
           <div>{post.content}</div>
           <Comment />
