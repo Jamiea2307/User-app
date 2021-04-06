@@ -5,6 +5,7 @@ import { LOGIN_USERS } from "../../Mutations/login";
 import { loginData } from "../../Constants/userContent";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { pathNames } from "../../Constants/pathNames";
 import UserInput from "../Widgets/userInput";
 
 const Login = () => {
@@ -22,7 +23,7 @@ const Login = () => {
           password: password,
         },
       });
-      history.push("/home");
+      history.push(pathNames.home);
     } catch (err) {
       setErrorMessage(err.message);
     }
@@ -50,7 +51,7 @@ const Login = () => {
         <div className="errorMessage">{errorMessage}</div>
         <SubmitBox type="submit" value="Submit" />
       </form>
-      <Link className="pageLink" to="/Register">
+      <Link className="pageLink" to={pathNames.register}>
         {loginData.linkText}
       </Link>
     </UserFormBox>

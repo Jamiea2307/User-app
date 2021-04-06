@@ -4,6 +4,7 @@ import { CREATE_USER } from "../../Mutations/register";
 import { UserFormBox, SubmitBox } from "../../Styles/userFormStyles";
 import { registrationData } from "../../Constants/userContent";
 import { Link } from "react-router-dom";
+import { pathNames } from "../../Constants/pathNames";
 import RegisterGratitude from "./registerGratitude";
 import UserInput from "../Widgets/userInput";
 
@@ -56,7 +57,7 @@ const Register = () => {
         <div className="errorMessage">{errorMessage}</div>
         <SubmitBox type="submit" value="Submit" />
       </form>
-      <Link className="pageLink" to="/Login">
+      <Link className="pageLink" to={pathNames.login}>
         {registrationData.linkText}
       </Link>
     </UserFormBox>

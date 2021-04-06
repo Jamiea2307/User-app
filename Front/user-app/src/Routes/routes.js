@@ -9,6 +9,7 @@ import GenericNotFound from "../Components/routeNotFound";
 import PrivateRoute from "./RouteAuthorisation/privateRoute";
 import LoggedInRoute from "./RouteAuthorisation/loggedInRoute";
 import NavBar from "../Components/Widgets/NavBar";
+import { pathNames } from "../Constants/pathNames";
 
 export const UserContext = createContext();
 
@@ -19,13 +20,13 @@ export const Routes = () => {
     <Router>
       <UserContext.Provider value={data}>
         <Switch>
-          <LoggedInRoute exact path={["/login", "/"]}>
+          <LoggedInRoute exact path={[pathNames.login, "/"]}>
             <Login />
           </LoggedInRoute>
-          <LoggedInRoute path="/Register">
+          <LoggedInRoute path={pathNames.register}>
             <Register />
           </LoggedInRoute>
-          <PrivateRoute path="/Home">
+          <PrivateRoute path={pathNames.home}>
             <NavBar />
             <HomePage />
           </PrivateRoute>

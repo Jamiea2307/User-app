@@ -1,6 +1,7 @@
 import { Route, Redirect } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../routes";
+import { pathNames } from "../../Constants/pathNames";
 import LoadingSpinner from "../../Components/Widgets/loadingSpinner";
 
 const LoggedInRoute = ({ children, ...rest }) => {
@@ -17,7 +18,7 @@ const LoggedInRoute = ({ children, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: "/user",
+              pathname: pathNames.home,
               state: { from: location },
             }}
           />

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { LoginRegisterPromptContainer } from "../../Styles/loginRegisterPromptStyles";
+import { pathNames } from "../../Constants/pathNames";
 
 const LoginRegisterPrompt = () => {
   return (
@@ -8,10 +9,10 @@ const LoginRegisterPrompt = () => {
         Please login or register to view content
       </div>
       <div className="promptContent">
-        <Link to="/Login">
+        <Link to={pathNames.login}>
           <button className="promptContentButton">Login</button>
         </Link>
-        <Link to="/Register">
+        <Link to={pathNames.register}>
           <button className="promptContentButton">Register</button>
         </Link>
       </div>

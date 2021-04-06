@@ -1,6 +1,7 @@
 import { Route, Redirect } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../routes";
+import { pathNames } from "../../Constants/pathNames";
 import LoadingSpinner from "../../Components/Widgets/loadingSpinner";
 
 const PrivateRoute = ({ children, ...rest }) => {
@@ -17,7 +18,7 @@ const PrivateRoute = ({ children, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: pathNames.login,
               state: { from: location },
             }}
           />
