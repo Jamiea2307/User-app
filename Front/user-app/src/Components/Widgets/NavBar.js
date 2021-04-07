@@ -1,5 +1,5 @@
 import { NavBarContainer, LogoutButton } from "../../Styles/navBarStyles";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../Routes/routes";
 import { LOGOUT_USER } from "../../Mutations/logout";
 import { useHistory } from "react-router-dom";
