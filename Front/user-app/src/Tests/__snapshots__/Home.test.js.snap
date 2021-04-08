@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders correctly 1`] = `
+Array [
+  <div
+    className="sc-bdfBwQ dHTMLg"
+  >
+    <div
+      className="sc-gsTCUz fJoPy"
+    >
+      <button
+        className="sc-eCssSg"
+        onClick={[Function]}
+      >
+        Create Post
+      </button>
+    </div>
+    <div>
+      Loading
+    </div>
+  </div>,
+  " ",
+]
+`;

@@ -1,28 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`Login renders correctly 1`] = `
 <div
   className="sc-bdfBwQ lozkLg"
 >
+  <h2>
+    Login
+  </h2>
   <form
-    className="registrationForm"
+    className="login-form"
     onSubmit={[Function]}
   >
-    <h2>
-      Register
-    </h2>
-    <div
-      className="sc-dlfnbm jqeTBD user-box"
-    >
-      <input
-        onChange={[Function]}
-        type="text"
-      />
-      <label>
-        Name:
-         
-      </label>
-    </div>
     <div
       className="sc-dlfnbm jqeTBD user-box"
     >
@@ -60,10 +48,10 @@ exports[`renders correctly 1`] = `
   </form>
   <a
     className="pageLink"
-    href="/login"
+    href="/register"
     onClick={[Function]}
   >
-    Login
+    Register
   </a>
 </div>
 `;

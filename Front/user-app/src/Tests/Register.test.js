@@ -1,35 +1,50 @@
 import React from "react";
 import Register from "../Components/userEntry/register";
-import renderer from "react-test-renderer";
 import { BrowserRouter as Router } from "react-router-dom";
 import { CREATE_USER } from "../Mutations/register";
 import { MockedProvider } from "@apollo/client/testing";
+import { render, fireEvent } from "@testing-library/react";
+import { userMock } from "./MockedData/RegisterData";
 
-it("renders correctly", () => {
-  const userMock = {
-    request: {
-      query: CREATE_USER,
-      variables: {
-        name: "TestUser",
-        email: "TestUser@email.com",
-        password: "Password123",
-      },
-    },
-    result: {
-      data: {
-        createUser: true,
-      },
-    },
-  };
-  const tree = renderer
-    .create(
-      <MockedProvider mocks={[userMock]} addTypename={false}>
-        <Router>
-          <Register />
-        </Router>
-      </MockedProvider>
-    )
-    .toJSON();
+test("renders correctly", () => {
+  const { getByText } = render(
+    <MockedProvider mocks={[]} addTypename={false}>
+      <Router>
+        <Register />
+      </Router>
+    </MockedProvider>
+  );
 
-  expect(tree).toMatchSnapshot();
+  getByText("Register");
+  getByText("Name:");
+  getByText("Email:");
+  getByText("Password:");
+  getByText("Login");
+  // getByText("Thank you for registering! Please login");
 });
+
+test("allows users to register", () => {
+  render(
+    <MockedProvider mocks={[userMock]} addTypename={false}>
+      <Router>
+        <Register />
+      </Router>
+    </MockedProvider>
+  );
+});
+
+// test("renders correctly", () => {
+//   const tree = renderer
+//     .create(
+//       <MockedProvider mocks={[userMock]} addTypename={false}>
+//         <Router>
+//           <Register />
+//         </Router>
+//       </MockedProvider>
+//     )
+//     .toJSON();
+
+//   console.log(tree);
+
+//   expect(tree).toMatchSnapshot();
+// });
