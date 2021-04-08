@@ -68,7 +68,7 @@ const resolvers = {
       const user = new User(details);
       await user.save();
 
-      return user;
+      return true;
     },
     loginUser: async (__, userDetails, { res }) => {
       const { error } = loginValidation(userDetails);

@@ -1,17 +1,35 @@
 import React from "react";
-import Adapter from "enzyme-adapter-react-16";
-import { shallow, configure } from "enzyme";
-import Register, { CREATE_USER } from "../Components/userEntry/register";
+import Register from "../Components/userEntry/register";
+import renderer from "react-test-renderer";
+import { BrowserRouter as Router } from "react-router-dom";
+import { CREATE_USER } from "../Mutations/register";
 import { MockedProvider } from "@apollo/client/testing";
 
-configure({ adapter: new Adapter() });
-
-describe("Register", () => {
-  it("renders correctly", () => {
-    shallow(
-      <MockedProvider mocks={[]}>
-        <Register />
+it("renders correctly", () => {
+  const userMock = {
+    request: {
+      query: CREATE_USER,
+      variables: {
+        name: "TestUser",
+        email: "TestUser@email.com",
+        password: "Password123",
+      },
+    },
+    result: {
+      data: {
+        createUser: true,
+      },
+    },
+  };
+  const tree = renderer
+    .create(
+      <MockedProvider mocks={[userMock]} addTypename={false}>
+        <Router>
+          <Register />
+        </Router>
       </MockedProvider>
-    );
-  });
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
 });

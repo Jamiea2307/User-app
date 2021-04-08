@@ -1,17 +1,19 @@
 import React from "react";
-import Adapter from "enzyme-adapter-react-16";
-import { shallow, configure } from "enzyme";
-import Login, { LOGIN_USERS } from "../Components/userEntry/login";
+import renderer from "react-test-renderer";
+import Login from "../Components/userEntry/login";
+import { LOGIN_USERS } from "../Mutations/login";
 import { MockedProvider } from "@apollo/client/testing";
-
-configure({ adapter: new Adapter() });
 
 describe("Login", () => {
   it("renders correctly", () => {
-    shallow(
-      <MockedProvider mocks={[]}>
-        <Login />
-      </MockedProvider>
-    );
+    const tree = renderer
+      .create(
+        <MockedProvider mocks={[]}>
+          <Login />
+        </MockedProvider>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
   });
 });
