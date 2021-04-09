@@ -24,7 +24,7 @@ test("renders correctly", () => {
 });
 
 test("allows users to register", () => {
-  render(
+  const { getByText } = render(
     <MockedProvider mocks={[userMock]} addTypename={false}>
       <Router>
         <Register />
