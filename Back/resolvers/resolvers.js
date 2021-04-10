@@ -49,8 +49,6 @@ const resolvers = {
     comments: async (_, __, { req }) => {
       Verify(req);
 
-      // console.log(Comments.find());
-
       return true;
     },
   },
