@@ -29,8 +29,6 @@ const Register = () => {
     }
   };
 
-  console.log(data);
-
   return !data ? (
     <UserFormBox>
       <form

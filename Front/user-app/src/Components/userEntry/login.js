@@ -28,6 +28,7 @@ const Login = () => {
       setErrorMessage(err.message);
     }
   };
+
   return (
     <UserFormBox>
       <h2>{loginData.title}</h2>
