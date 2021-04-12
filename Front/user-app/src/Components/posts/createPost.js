@@ -14,7 +14,7 @@ import {
 
 const CreatePost = () => {
   const [postContent, setPostContent] = useState("");
-  const [createPost, { data }] = useMutation(CREATE_POST);
+  const [createPost, { data, loading }] = useMutation(CREATE_POST);
   const [addPost, setAddPost] = useState(false);
 
   const createNewPost = async () => {
@@ -24,7 +24,9 @@ const CreatePost = () => {
           content: postContent,
         },
       });
-      if (data) {
+      if (loading) {
+        console.log("this be loading");
+      } else if (data) {
         setAddPost(false);
       }
     } catch (err) {

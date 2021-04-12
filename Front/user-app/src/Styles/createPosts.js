@@ -14,7 +14,7 @@ export const PostForm = styled.form`
 
 export const PostTextArea = styled.textarea`
   height: 5rem;
-  width: 45rem;
+  width: 100%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   border: 3px solid #cccccc;
   resize: vertical;
