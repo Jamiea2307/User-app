@@ -7,7 +7,6 @@ export const NavBarContainer = styled.div`
   top: 0;
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.16);
   background: #fff;
-  /* display: flex; */
   padding: 0.5rem;
 
   .userName {
