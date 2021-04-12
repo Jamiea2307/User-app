@@ -1,9 +1,10 @@
 import { NavBarContainer, LogoutButton } from "../../Styles/navBarStyles";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { UserContext } from "../../Routes/routes";
 import { LOGOUT_USER } from "../../Mutations/logout";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
+import { navBar } from "../../Constants/userContent";
 
 const NavBar = () => {
   const { data } = useContext(UserContext);
@@ -23,7 +24,7 @@ const NavBar = () => {
           logout();
         }}
       >
-        Logout
+        {navBar.logout}
       </LogoutButton>
     </NavBarContainer>
   );

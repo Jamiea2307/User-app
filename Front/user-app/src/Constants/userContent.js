@@ -19,3 +19,7 @@ export const post = {
   cancel: "Cancel",
   createPost: "Create Post",
 };
+
+export const navBar = {
+  logout: "Logout",
+};
