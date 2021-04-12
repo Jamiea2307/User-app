@@ -3,19 +3,21 @@ import { CREATE_POST } from "../../Mutations/createPost";
 import { useMutation } from "@apollo/client";
 import {
   CreatePostContainer,
-  PostForm,
-  PostTextArea,
   CreatePostButton,
 } from "../../Styles/createPosts";
 import {
   SubmitButton,
   CancelButton,
 } from "../../Styles/StandardWidgets/buttons";
+import { post } from "../../Constants/userContent";
 
 const CreatePost = () => {
   const [postContent, setPostContent] = useState("");
   const [createPost, { data, loading }] = useMutation(CREATE_POST);
   const [addPost, setAddPost] = useState(false);
+
+  console.log("data = ", data);
+  console.log("loading = ", loading);
 
   const createNewPost = async () => {
     try {
@@ -24,11 +26,7 @@ const CreatePost = () => {
           content: postContent,
         },
       });
-      if (loading) {
-        console.log("this be loading");
-      } else if (data) {
-        setAddPost(false);
-      }
+      setAddPost(false);
     } catch (err) {
       console.log(err.message);
     }
@@ -36,8 +34,11 @@ const CreatePost = () => {
 
   return addPost ? (
     <CreatePostContainer>
-      <PostForm>
-        <PostTextArea onChange={(e) => setPostContent(e.target.value)} />
+      <form>
+        <textarea
+          className="postTextArea"
+          onChange={(e) => setPostContent(e.target.value)}
+        />
         <div>
           <SubmitButton
             onClick={(e) => {
@@ -45,7 +46,7 @@ const CreatePost = () => {
               createNewPost(e);
             }}
           >
-            Submit
+            {post.submit}
           </SubmitButton>
           <CancelButton
             onClick={(e) => {
@@ -53,10 +54,10 @@ const CreatePost = () => {
               setAddPost(false);
             }}
           >
-            Cancel
+            {post.cancel}
           </CancelButton>
         </div>
-      </PostForm>
+      </form>
     </CreatePostContainer>
   ) : (
     <CreatePostContainer>
@@ -66,7 +67,7 @@ const CreatePost = () => {
           setAddPost(true);
         }}
       >
-        Create Post
+        {post.createPost}
       </CreatePostButton>
     </CreatePostContainer>
   );

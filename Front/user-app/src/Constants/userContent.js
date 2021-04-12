@@ -13,3 +13,9 @@ export const registrationData = {
   linkText: "Login",
   successText: "Thank you for registering! Please login",
 };
+
+export const post = {
+  submit: "Submit",
+  cancel: "Cancel",
+  createPost: "Create Post",
+};
