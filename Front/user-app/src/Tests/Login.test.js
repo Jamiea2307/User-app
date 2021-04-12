@@ -3,20 +3,22 @@ import renderer from "react-test-renderer";
 import Login from "../Components/userEntry/login";
 import { BrowserRouter as Router } from "react-router-dom";
 import { LOGIN_USERS } from "../Mutations/login";
+import { render, fireEvent } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
 
-describe("Login", () => {
-  it("renders correctly", () => {
-    const tree = renderer
-      .create(
-        <MockedProvider mocks={[]}>
-          <Router>
-            <Login />
-          </Router>
-        </MockedProvider>
-      )
-      .toJSON();
+describe("Login Tests", () => {
+  test("renders correctly", () => {
+    const { getByText } = render(
+      <MockedProvider mocks={[]}>
+        <Router>
+          <Login />
+        </Router>
+      </MockedProvider>
+    );
 
-    expect(tree).toMatchSnapshot();
+    getByText("Login");
+    getByText("Email:");
+    getByText("Password:");
+    getByText("Register");
   });
 });
