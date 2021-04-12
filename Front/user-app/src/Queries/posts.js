@@ -12,8 +12,8 @@ export const GET_POSTS = gql`
 `;
 
 export const GET_USER_POSTS = gql`
-  query getPosts {
-    posts {
+  query getUserPosts($userName: String!) {
+    getUserPosts(userName: $userName) {
       id
       name
       content

@@ -17,8 +17,6 @@ export const UserContext = createContext();
 export const Routes = () => {
   const data = useQuery(GET_USER);
 
-  console.log(data.data);
-
   return (
     <Router>
       <UserContext.Provider value={data}>

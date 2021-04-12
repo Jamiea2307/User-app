@@ -40,11 +40,26 @@ const resolvers = {
     getUserPosts: async (_, __, { req }) => {
       Verify(req);
 
-      const post = await Post.find({ author: req.userId });
+      console.log(req.body.variables.userName);
 
-      // sort and return when you've added comments
+      const user = await User.findOne({ name: req.body.variables.userName });
 
-      return true;
+      const posts = await Post.find({
+        author: user._id,
+      }).populate({
+        path: "author",
+        select: "name",
+      });
+
+      const sortedPosts = posts.map((post) => {
+        return {
+          id: post.id,
+          name: post.author.name,
+          content: post.content,
+          date: post.dateAdded.toISOString(),
+        };
+      });
+      return sortedPosts;
     },
     comments: async (_, __, { req }) => {
       Verify(req);
@@ -59,6 +74,9 @@ const resolvers = {
 
       const emailExists = await User.findOne({ email: details.email });
       if (emailExists) throw new UserInputError("Email already exists");
+
+      const userNameExists = await User.findOne({ name: details.name });
+      if (userNameExists) throw new UserInputError("Name already exists");
 
       const salt = await bcrypt.genSalt(10);
       details.password = await bcrypt.hash(details.password, salt);
