@@ -10,3 +10,14 @@ export const GET_POSTS = gql`
     }
   }
 `;
+
+export const GET_USER_POSTS = gql`
+  query getPosts {
+    posts {
+      id
+      name
+      content
+      date
+    }
+  }
+`;

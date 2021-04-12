@@ -17,6 +17,8 @@ export const UserContext = createContext();
 export const Routes = () => {
   const data = useQuery(GET_USER);
 
+  console.log(data.data);
+
   return (
     <Router>
       <UserContext.Provider value={data}>
@@ -27,7 +29,8 @@ export const Routes = () => {
           <LoggedInRoute path={pathNames.register}>
             <Register />
           </LoggedInRoute>
-          <PrivateRoute path={pathNames.user}>
+          <PrivateRoute path={`${pathNames.user}/:id`}>
+            <NavBar />
             <User />
           </PrivateRoute>
           <PrivateRoute path={pathNames.home}>
