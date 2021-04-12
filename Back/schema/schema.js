@@ -6,7 +6,7 @@ const typeDefs = gql`
     user: User!
     posts: [Post]
     comments: Boolean!
-    getUserPosts(userName: String!): [Post]
+    getUserPosts(userName: String!): [Post]!
   }
 
   type Post {

@@ -5,14 +5,22 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "react-router";
 
 const User = () => {
-  const { data } = useContext(UserContext);
+  //   const { data } = useContext(UserContext);
   let { id } = useParams();
 
-  const userPosts = useQuery(GET_USER_POSTS, {
+  const { data, loading } = useQuery(GET_USER_POSTS, {
     variables: { userName: id },
   });
 
-  return <div></div>;
+  if (loading) return <div>Loading...</div>;
+
+  return data.getUserPosts.map((post) => (
+    <div>
+      {post.name}
+      {post.content}
+      {post.date}
+    </div>
+  ));
 };
 
 export default User;

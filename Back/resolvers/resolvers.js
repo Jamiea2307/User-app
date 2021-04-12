@@ -40,8 +40,6 @@ const resolvers = {
     getUserPosts: async (_, __, { req }) => {
       Verify(req);
 
-      console.log(req.body.variables.userName);
-
       const user = await User.findOne({ name: req.body.variables.userName });
 
       const posts = await Post.find({
@@ -59,6 +57,7 @@ const resolvers = {
           date: post.dateAdded.toISOString(),
         };
       });
+      console.log(sortedPosts);
       return sortedPosts;
     },
     comments: async (_, __, { req }) => {
