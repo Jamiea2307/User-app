@@ -10,6 +10,7 @@ import GenericNotFound from "../Components/routeNotFound";
 import PrivateRoute from "./RouteAuthorisation/privateRoute";
 import LoggedInRoute from "./RouteAuthorisation/loggedInRoute";
 import NavBar from "../Components/Widgets/NavBar";
+import User from "../Components/user/userPage";
 
 export const UserContext = createContext();
 
@@ -26,6 +27,9 @@ export const Routes = () => {
           <LoggedInRoute path={pathNames.register}>
             <Register />
           </LoggedInRoute>
+          <PrivateRoute path={pathNames.user}>
+            <User />
+          </PrivateRoute>
           <PrivateRoute path={pathNames.home}>
             <NavBar />
             <HomePage />

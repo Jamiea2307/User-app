@@ -26,6 +26,7 @@ export const CreatePostContainer = styled.div`
 export const CreatePostButton = styled.button`
   width: 100%;
   height: 2.5rem;
+  cursor: pointer;
 
   @media (min-width: 768px) {
   }

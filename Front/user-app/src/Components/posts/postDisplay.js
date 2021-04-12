@@ -17,7 +17,7 @@ const PostDisplay = () => {
             {post.name} ∙ <DateFormatter date={post.date} />
           </div>
           <div className="postText">{post.content}</div>
-          <Comment />
+          {/* <Comment /> */}
         </PostContainer>
       ))}
     </DisplayContainer>
