@@ -27,7 +27,7 @@ export const Routes = () => {
           <LoggedInRoute path={pathNames.register}>
             <Register />
           </LoggedInRoute>
-          <PrivateRoute path={`${pathNames.user}/:id`}>
+          <PrivateRoute path={`${pathNames.user}:id`}>
             <NavBar />
             <User />
           </PrivateRoute>

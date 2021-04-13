@@ -14,13 +14,18 @@ const User = () => {
 
   if (loading) return <div>Loading...</div>;
 
-  return data.getUserPosts.map((post) => (
-    <div>
-      {post.name}
-      {post.content}
-      {post.date}
+  return (
+    <div style={{ marginTop: "3rem" }}>
+      <div>Showing activity of {id}</div>
+      {data.getUserPosts.map((post) => (
+        <div key={post.id}>
+          {post.name}
+          {post.content}
+          {post.date}
+        </div>
+      ))}
     </div>
-  ));
+  );
 };
 
 export default User;
