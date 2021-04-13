@@ -22,7 +22,7 @@ const resolvers = {
       Verify(req);
       //needs to be updated to find posts in a certain way otherwise
       //can be removed as getUserPost has same func
-      const posts = await Post.find().populate({
+      const posts = await Post.find().sort({ dateAdded: "desc" }).populate({
         path: "author",
         select: "name",
       });
@@ -45,10 +45,12 @@ const resolvers = {
 
       const posts = await Post.find({
         author: user._id,
-      }).populate({
-        path: "author",
-        select: "name",
-      });
+      })
+        .sort({ dateAdded: "desc" })
+        .populate({
+          path: "author",
+          select: "name",
+        });
 
       const sortedPosts = posts.map((post) => {
         return {
