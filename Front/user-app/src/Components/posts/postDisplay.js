@@ -1,7 +1,7 @@
 import { GET_POSTS } from "../../Queries/posts";
 import { useQuery } from "@apollo/client";
 import DateFormatter from "../Widgets/dateFormatter";
-import Comment from "../posts/comments";
+// import Comment from "../posts/comments";
 import { DisplayContainer, PostContainer } from "../../Styles/postDisplay";
 import { Link } from "react-router-dom";
 import { pathNames } from "../../Constants/pathNames";

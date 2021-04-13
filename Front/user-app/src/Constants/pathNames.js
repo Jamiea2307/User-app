@@ -3,4 +3,5 @@ export const pathNames = {
   login: "/login",
   register: "/register",
   user: "/user/",
+  postThread: "/thread/",
 };

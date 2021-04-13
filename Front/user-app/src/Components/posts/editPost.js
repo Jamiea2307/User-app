@@ -8,7 +8,7 @@ import { useMutation } from "@apollo/client";
 import { CREATE_POST } from "../../Mutations/createPost";
 import { useState } from "react";
 
-const EditPost = ({ displayAddPost }) => {
+const AddPost = ({ displayAddPost }) => {
   const [postContent, setPostContent] = useState("");
   const [createPost] = useMutation(CREATE_POST);
 
@@ -54,4 +54,4 @@ const EditPost = ({ displayAddPost }) => {
   );
 };
 
-export default EditPost;
+export default AddPost;

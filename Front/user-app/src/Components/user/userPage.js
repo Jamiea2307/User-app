@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { UserContext } from "../../Routes/routes";
+// import { useContext } from "react";
+// import { UserContext } from "../../Routes/routes";
 import { GET_USER_POSTS } from "../../Queries/posts";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router";

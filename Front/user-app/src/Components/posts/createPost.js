@@ -1,12 +1,4 @@
 import { useState } from "react";
-import { CREATE_POST } from "../../Mutations/createPost";
-import { useMutation } from "@apollo/client";
-// import { CreatePostContainer } from "../../Styles/createPosts";
-// import {
-//   SubmitButton,
-//   CancelButton,
-// } from "../../Styles/StandardWidgets/buttons";
-// import { post } from "../../Constants/userContent";
 import PostButton from "./postButton";
 import EditPost from "./editPost";
 
