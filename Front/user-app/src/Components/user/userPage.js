@@ -8,11 +8,13 @@ const User = () => {
   //   const { data } = useContext(UserContext);
   let { id } = useParams();
 
-  const { data, loading } = useQuery(GET_USER_POSTS, {
+  const { data, loading, error } = useQuery(GET_USER_POSTS, {
     variables: { userName: id },
   });
 
   if (loading) return <div>Loading...</div>;
+
+  if (error) return <div>Error</div>;
 
   return (
     <div style={{ marginTop: "3rem" }}>

@@ -43,6 +43,8 @@ const resolvers = {
 
       const user = await User.findOne({ name: req.body.variables.userName });
 
+      if (!user || user === null) throw new UserInputError("User Not Found");
+
       const posts = await Post.find({
         author: user._id,
       })
@@ -60,6 +62,7 @@ const resolvers = {
           date: post.dateAdded.toISOString(),
         };
       });
+
       return sortedPosts;
     },
     comments: async (_, __, { req }) => {

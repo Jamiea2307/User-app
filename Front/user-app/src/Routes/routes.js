@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { createContext } from "react";
 import { GET_USER } from "../Queries/users";
 import { pathNames } from "../Constants/pathNames";
+import { PrivateRouteContainer } from "../Styles/privateRoute";
 import Login from "../Components/userEntry/login";
 import Register from "../Components/userEntry/register";
 import HomePage from "../Components/home";
@@ -30,15 +31,21 @@ export const Routes = () => {
           </LoggedInRoute>
           <PrivateRoute path={`${pathNames.user}:id`}>
             <NavBar />
-            <User />
+            <PrivateRouteContainer>
+              <User />
+            </PrivateRouteContainer>
           </PrivateRoute>
           <PrivateRoute path={pathNames.home}>
             <NavBar />
-            <HomePage />
+            <PrivateRouteContainer>
+              <HomePage />
+            </PrivateRouteContainer>
           </PrivateRoute>
           <PrivateRoute path={`${pathNames.postThread}:id`}>
             <NavBar />
-            <PostThread />
+            <PrivateRouteContainer>
+              <PostThread />
+            </PrivateRouteContainer>
           </PrivateRoute>
           <Route component={GenericNotFound} />
         </Switch>
