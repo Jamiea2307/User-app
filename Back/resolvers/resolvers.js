@@ -20,7 +20,8 @@ const resolvers = {
     },
     posts: async (_, __, { req }) => {
       Verify(req);
-
+      //needs to be updated to find posts in a certain way otherwise
+      //can be removed as getUserPost has same func
       const posts = await Post.find().populate({
         path: "author",
         select: "name",
@@ -57,7 +58,6 @@ const resolvers = {
           date: post.dateAdded.toISOString(),
         };
       });
-      console.log(sortedPosts);
       return sortedPosts;
     },
     comments: async (_, __, { req }) => {
