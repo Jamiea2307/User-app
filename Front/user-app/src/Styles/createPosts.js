@@ -10,13 +10,21 @@ export const CreatePostContainer = styled.div`
     border: 1px solid black;
   }
 
-  .postTextArea {
-    height: 5rem;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  .postTitleArea {
     border: 3px solid #cccccc;
     resize: vertical;
     overflow: auto;
-    width: 100%;
+    width: 60%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom: 1rem;
+  }
+
+  .postTextArea {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 5rem;
+    border: 3px solid #cccccc;
+    resize: vertical;
+    overflow: auto;
     width: -moz-available;
     width: -webkit-fill-available;
     width: fill-available;

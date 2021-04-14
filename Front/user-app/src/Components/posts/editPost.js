@@ -9,7 +9,7 @@ import { CREATE_POST } from "../../Mutations/createPost";
 import { useState } from "react";
 
 const AddPost = ({ displayAddPost }) => {
-  const [postContent, setPostContent] = useState("");
+  const [postContent, setPostContent] = useState({});
   const [createPost] = useMutation(CREATE_POST);
 
   const createNewPost = async () => {
@@ -24,12 +24,24 @@ const AddPost = ({ displayAddPost }) => {
       console.log(err.message);
     }
   };
+  console.log({ ...postContent });
+
   return (
     <CreatePostContainer>
       <form>
+        <input
+          className="postTitleArea"
+          placeholder="Title"
+          onChange={(e) =>
+            setPostContent({ title: e.target.value, body: postContent.body })
+          }
+        />
         <textarea
+          placeholder="Body"
           className="postTextArea"
-          onChange={(e) => setPostContent(e.target.value)}
+          onChange={(e) =>
+            setPostContent({ title: postContent.title, body: e.target.value })
+          }
         />
         <div>
           <SubmitButton
