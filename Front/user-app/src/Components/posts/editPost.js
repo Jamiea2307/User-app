@@ -33,14 +33,14 @@ const AddPost = ({ displayAddPost }) => {
           className="postTitleArea"
           placeholder="Title"
           onChange={(e) =>
-            setPostContent({ title: e.target.value, body: postContent.body })
+            setPostContent({ ...postContent, title: e.target.value })
           }
         />
         <textarea
           placeholder="Body"
           className="postTextArea"
           onChange={(e) =>
-            setPostContent({ title: postContent.title, body: e.target.value })
+            setPostContent({ ...postContent, body: e.target.value })
           }
         />
         <div>
