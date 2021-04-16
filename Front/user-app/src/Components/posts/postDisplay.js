@@ -16,7 +16,10 @@ const PostDisplay = () => {
       {data.posts.map((post) => (
         <PostContainer key={post.id}>
           <div>
-            <Link to={`${pathNames.user}${post.name}`}>{post.name}</Link> ∙
+            <Link className="postUserLink" to={`${pathNames.user}${post.name}`}>
+              {post.name}
+            </Link>{" "}
+            ∙
             <DateFormatter date={post.date} />
           </div>
           <div className="postText">{post.title}</div>
