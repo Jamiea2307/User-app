@@ -20,6 +20,13 @@ export const PostContainer = styled.div`
     border: none;
     box-shadow: 0 1px 3px rgb(0 0 0 / 16%), 0 1px 5px rgb(0 0 0 / 23%);
   }
+
+  .postDetailContainer {
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+
   .postUserLink {
     text-decoration: none;
     color: black;

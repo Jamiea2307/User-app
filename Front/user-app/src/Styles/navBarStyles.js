@@ -11,6 +11,8 @@ export const NavBarContainer = styled.div`
 
   .userName {
     display: inline-block;
+    color: black;
+    text-decoration: none;
   }
 `;
 

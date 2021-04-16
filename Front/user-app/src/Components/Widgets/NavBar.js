@@ -5,6 +5,8 @@ import { LOGOUT_USER } from "../../Mutations/logout";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { navBar } from "../../Constants/userContent";
+import { Link } from "react-router-dom";
+import { pathNames } from "../../Constants/pathNames";
 
 const NavBar = () => {
   const { data } = useContext(UserContext);
@@ -18,7 +20,9 @@ const NavBar = () => {
 
   return (
     <NavBarContainer>
-      <div className="userName">{data.user.name}</div>
+      <Link className="userName" to={`${pathNames.user}${data.user.name}`}>
+        {data.user.name}
+      </Link>
       <LogoutButton
         onClick={() => {
           logout();

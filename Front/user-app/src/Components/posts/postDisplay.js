@@ -15,11 +15,11 @@ const PostDisplay = () => {
     <DisplayContainer>
       {data.posts.map((post) => (
         <PostContainer key={post.id}>
-          <div>
+          <div className="postDetailContainer">
             <Link className="postUserLink" to={`${pathNames.user}${post.name}`}>
               {post.name}
-            </Link>{" "}
-            ∙
+            </Link>
+
             <DateFormatter date={post.date} />
           </div>
           <div className="postText">{post.title}</div>
