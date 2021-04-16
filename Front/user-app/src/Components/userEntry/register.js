@@ -17,8 +17,6 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [createUser, { data }] = useMutation(CREATE_USER);
 
-  console.log(userDetails);
-
   const submitUser = async () => {
     try {
       await createUser({

@@ -9,15 +9,17 @@ import { pathNames } from "../../Constants/pathNames";
 const PostDisplay = () => {
   const { loading, data } = useQuery(GET_POSTS);
 
-  console.log(data);
   if (loading) return <div>Loading</div>;
 
   return (
     <DisplayContainer>
       {data.posts.map((post) => (
         <PostContainer key={post.id}>
-          <div>
-            <Link to={`${pathNames.user}${post.name}`}>{post.name}</Link> ∙
+          <div className="postDetailContainer">
+            <Link className="postUserLink" to={`${pathNames.user}${post.name}`}>
+              {post.name}
+            </Link>
+
             <DateFormatter date={post.date} />
           </div>
           <div className="postText">{post.title}</div>

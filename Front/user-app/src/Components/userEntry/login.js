@@ -10,17 +10,18 @@ import UserInput from "../Widgets/userInput";
 
 const Login = () => {
   const history = useHistory();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userDetails, setUserDetails] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const [loginUser] = useMutation(LOGIN_USERS);
+
+  console.log(userDetails);
 
   const submitUser = async () => {
     try {
       await loginUser({
         variables: {
-          email: email,
-          password: password,
+          email: userDetails.email,
+          password: userDetails.password,
         },
       });
       history.push(pathNames.home);
@@ -41,12 +42,14 @@ const Login = () => {
       >
         <UserInput
           loginData={loginData.email}
-          setValue={setEmail}
+          setValue={(email) => setUserDetails({ ...userDetails, email: email })}
           type="text"
         />
         <UserInput
           loginData={loginData.password}
-          setValue={setPassword}
+          setValue={(password) =>
+            setUserDetails({ ...userDetails, password: password })
+          }
           type="password"
         />
         <div className="errorMessage">{errorMessage}</div>
