@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const { registerValidation } = require("../validation/Register");
 const { loginValidation } = require("../validation/Login");
+const { postValidation } = require("../validation/Post");
 const { UserInputError } = require("apollo-server-express");
 const createTokens = require("../authorisation/auth");
 const Verify = require("../authorisation/verification");
@@ -135,8 +136,8 @@ const resolvers = {
     },
     createPost: async (__, details, { req }) => {
       Verify(req);
-
-      console.log("DETAILS = ", details);
+      const { error } = postValidation(details);
+      if (error) return new UserInputError(error.message);
 
       const user = await User.findOne({ _id: req.userId });
 

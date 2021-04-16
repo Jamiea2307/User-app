@@ -9,19 +9,23 @@ import RegisterGratitude from "./registerGratitude";
 import UserInput from "../Widgets/userInput";
 
 const Register = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   const [errorMessage, setErrorMessage] = useState("");
   const [createUser, { data }] = useMutation(CREATE_USER);
+
+  console.log(userDetails);
 
   const submitUser = async () => {
     try {
       await createUser({
         variables: {
-          name: name,
-          email: email,
-          password: password,
+          name: userDetails.name,
+          email: userDetails.email,
+          password: userDetails.password,
         },
       });
     } catch (err) {
@@ -41,17 +45,19 @@ const Register = () => {
         <h2>{registrationData.title}</h2>
         <UserInput
           loginData={registrationData.name}
-          setValue={setName}
+          setValue={(name) => setUserDetails({ ...userDetails, name: name })}
           type="text"
         />
         <UserInput
           loginData={registrationData.email}
-          setValue={setEmail}
+          setValue={(email) => setUserDetails({ ...userDetails, email: email })}
           type="text"
         />
         <UserInput
           loginData={registrationData.password}
-          setValue={setPassword}
+          setValue={(password) =>
+            setUserDetails({ ...userDetails, password: password })
+          }
           type="password"
         />
         <div className="errorMessage">{errorMessage}</div>

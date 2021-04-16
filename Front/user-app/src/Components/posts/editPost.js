@@ -9,7 +9,8 @@ import { CREATE_POST } from "../../Mutations/createPost";
 import { useState } from "react";
 
 const AddPost = ({ displayAddPost }) => {
-  const [postContent, setPostContent] = useState({});
+  const [postContent, setPostContent] = useState({ title: "", body: "" });
+  const [errorMessage, setErrorMessage] = useState("");
   const [createPost] = useMutation(CREATE_POST);
 
   const createNewPost = async () => {
@@ -22,7 +23,7 @@ const AddPost = ({ displayAddPost }) => {
       });
       displayAddPost(false);
     } catch (err) {
-      console.log(err.message);
+      setErrorMessage(err.message);
     }
   };
 
@@ -43,6 +44,7 @@ const AddPost = ({ displayAddPost }) => {
             setPostContent({ ...postContent, body: e.target.value })
           }
         />
+        <div>{errorMessage}</div>
         <div>
           <SubmitButton
             onClick={(e) => {
