@@ -9,7 +9,6 @@ import { pathNames } from "../../Constants/pathNames";
 const PostDisplay = () => {
   const { loading, data } = useQuery(GET_POSTS);
 
-  console.log(data);
   if (loading) return <div>Loading</div>;
 
   return (
