@@ -12,7 +12,8 @@ const typeDefs = gql`
   type Post {
     id: String!
     name: String!
-    content: String!
+    title: String!
+    body: String!
     date: String!
   }
 
@@ -22,10 +23,15 @@ const typeDefs = gql`
     password: String!
   }
 
+  type PostContent {
+    title: String!
+    body: String!
+  }
+
   type Mutation {
     createUser(name: String!, email: String!, password: String!): Boolean!
     loginUser(email: String!, password: String!): User!
-    createPost(content: String!): Boolean!
+    createPost(title: String!, body: String!): Boolean!
     logoutUser: Boolean!
     invalidateTokens: Boolean!
     createComment(content: String!): Boolean!

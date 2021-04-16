@@ -31,7 +31,8 @@ const resolvers = {
         return {
           id: post.id,
           name: post.author.name,
-          content: post.content,
+          title: post.title,
+          body: post.body,
           date: post.dateAdded.toISOString(),
         };
       });
@@ -58,7 +59,8 @@ const resolvers = {
         return {
           id: post.id,
           name: post.author.name,
-          content: post.content,
+          title: post.title,
+          body: post.body,
           date: post.dateAdded.toISOString(),
         };
       });
@@ -134,6 +136,8 @@ const resolvers = {
     createPost: async (__, details, { req }) => {
       Verify(req);
 
+      console.log("DETAILS = ", details);
+
       const user = await User.findOne({ _id: req.userId });
 
       await user.save((err) => {
@@ -141,7 +145,8 @@ const resolvers = {
 
         const post = new Post({
           author: req.userId,
-          content: details.content,
+          title: details.title,
+          body: details.body,
         });
 
         post.save((err) => {

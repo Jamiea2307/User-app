@@ -16,7 +16,8 @@ const AddPost = ({ displayAddPost }) => {
     try {
       await createPost({
         variables: {
-          content: postContent,
+          title: postContent.title,
+          body: postContent.body,
         },
       });
       displayAddPost(false);
@@ -24,7 +25,6 @@ const AddPost = ({ displayAddPost }) => {
       console.log(err.message);
     }
   };
-  console.log({ ...postContent });
 
   return (
     <CreatePostContainer>

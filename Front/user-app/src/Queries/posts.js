@@ -5,7 +5,8 @@ export const GET_POSTS = gql`
     posts {
       id
       name
-      content
+      title
+      body
       date
     }
   }
@@ -16,7 +17,8 @@ export const GET_USER_POSTS = gql`
     getUserPosts(userName: $userName) {
       id
       name
-      content
+      title
+      body
       date
     }
   }

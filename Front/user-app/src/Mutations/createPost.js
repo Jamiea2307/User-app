@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_POST = gql`
-  mutation createPost($content: String!) {
-    createPost(content: $content)
+  mutation createPost($title: String!, $body: String!) {
+    createPost(title: $title, body: $body)
   }
 `;

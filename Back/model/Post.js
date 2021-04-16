@@ -3,7 +3,8 @@ const schema = mongoose.Schema;
 
 const postSchema = new schema({
   author: { type: schema.Types.ObjectId, ref: "User" },
-  content: { type: String, required: true },
+  title: { type: String, required: true },
+  body: { type: String, required: true },
   dateAdded: { type: Date, default: Date.now },
   comments: [{ type: schema.Types.ObjectId, ref: "Comment" }],
 });
