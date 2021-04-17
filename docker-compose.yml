@@ -1,0 +1,55 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: ./Back
+      dockerfile: Dockerfile
+    image: user-app-server
+    container_name: user-app-node-server
+    command: /usr/src/app/node_modules/nodemon/bin/nodemon.js
+    volumes:
+        - ./Back/:/usr/src/app
+        - /usr/src/app/node_modules
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    env_file: ./Back/.env
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+  mongo:
+    image: mongo
+    volumes:
+      - data-volume:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+  client:
+    build:
+      context: ./Front/user-app
+      dockerfile: Dockerfile
+    image: myapp-client
+    container_name: myapp-react-client
+    command: npm start
+    volumes:
+      - ./Front/user-app/:/usr/app
+      - /usr/app/node_modules
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    data-volume:
+    node_modules:
+    web-root:
+      driver: local
