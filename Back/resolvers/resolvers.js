@@ -1,4 +1,5 @@
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { registerValidation } = require("../validation/Register");
 const { loginValidation } = require("../validation/Login");
 const { postValidation } = require("../validation/Post");

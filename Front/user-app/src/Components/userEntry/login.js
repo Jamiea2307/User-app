@@ -14,8 +14,6 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [loginUser] = useMutation(LOGIN_USERS);
 
-  console.log(userDetails);
-
   const submitUser = async () => {
     try {
       await loginUser({
