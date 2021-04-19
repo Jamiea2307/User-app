@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Homepage = styled.div`
+export const SiteWrapper = styled.div`
   margin-top: 4rem;
 
   @media (min-width: 768px) {

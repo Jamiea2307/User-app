@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const postSchema = new schema({
-  author: { type: schema.Types.ObjectId, ref: "User" },
+  name: { type: schema.Types.ObjectId, ref: "User" },
   title: { type: String, required: true },
   body: { type: String, required: true },
   dateAdded: { type: Date, default: Date.now },

@@ -11,7 +11,7 @@ services:
         - ./Back/:/usr/src/app
         - /usr/src/app/node_modules
     ports:
-      - "5000:5000"
+      - "4000:4000"
     depends_on:
       - mongo
     env_file: ./Back/.env

@@ -11,12 +11,15 @@ export const ReplyButton = styled.button`
 
 export const CommentArea = styled.form`
   padding: 1rem;
-  width: 30rem;
+  /* width: 30rem; */
+  margin-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.16);
 `;
 
 export const CommentTextArea = styled.textarea`
   height: 5rem;
-  width: 25rem;
+  width: 30rem;
+  max-width: 100%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 `;
 

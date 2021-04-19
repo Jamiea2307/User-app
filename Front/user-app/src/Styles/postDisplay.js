@@ -8,7 +8,7 @@ export const DisplayContainer = styled.div`
   }
 `;
 
-export const PostContainer = styled.div`
+export const PostWrapper = styled.div`
   padding: 1rem;
   background: #fff;
   margin: 0.25rem 0px;
@@ -34,5 +34,7 @@ export const PostContainer = styled.div`
 
   .postText {
     word-break: break-word;
+    text-decoration: none;
+    color: black;
   }
 `;

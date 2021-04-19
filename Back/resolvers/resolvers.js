@@ -1,5 +1,5 @@
-// const bcrypt = require("bcrypt");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
+// const bcrypt = require("bcryptjs");
 const { registerValidation } = require("../validation/Register");
 const { loginValidation } = require("../validation/Login");
 const { postValidation } = require("../validation/Post");
@@ -22,17 +22,18 @@ const resolvers = {
     },
     posts: async (_, __, { req }) => {
       Verify(req);
+
       //needs to be updated to find posts in a certain way otherwise
       //can be removed as getUserPost has same func
       const posts = await Post.find().sort({ dateAdded: "desc" }).populate({
-        path: "author",
+        path: "name",
         select: "name",
       });
 
       const sortedPosts = posts.map((post) => {
         return {
           id: post.id,
-          name: post.author.name,
+          name: post.name.name,
           title: post.title,
           body: post.body,
           date: post.dateAdded.toISOString(),
@@ -41,26 +42,25 @@ const resolvers = {
 
       return sortedPosts;
     },
-    getUserPosts: async (_, __, { req }) => {
+    getUserPosts: async (_, details, { req }) => {
       Verify(req);
-
-      const user = await User.findOne({ name: req.body.variables.userName });
+      const user = await User.findOne({ name: details.userName });
 
       if (!user || user === null) throw new UserInputError("User Not Found");
 
       const posts = await Post.find({
-        author: user._id,
+        name: user._id,
       })
         .sort({ dateAdded: "desc" })
         .populate({
-          path: "author",
+          path: "name",
           select: "name",
         });
 
       const sortedPosts = posts.map((post) => {
         return {
           id: post.id,
-          name: post.author.name,
+          name: post.name.name,
           title: post.title,
           body: post.body,
           date: post.dateAdded.toISOString(),
@@ -69,10 +69,22 @@ const resolvers = {
 
       return sortedPosts;
     },
-    comments: async (_, __, { req }) => {
+    getThread: async (_, details, { req }) => {
       Verify(req);
 
-      return true;
+      const postDetails = await Post.findById(details.postId).populate({
+        path: "name",
+        select: "name",
+      });
+
+      const post = {
+        name: postDetails.name.name,
+        title: postDetails.title,
+        body: postDetails.body,
+        date: postDetails.dateAdded.toISOString(),
+      };
+
+      return post;
     },
   },
   Mutation: {
@@ -105,6 +117,7 @@ const resolvers = {
         userDetails.password,
         user.password
       );
+
       if (!validPass) return new UserInputError("Email or password incorrect");
 
       const { accessToken, refreshToken } = createTokens(user);
@@ -146,7 +159,7 @@ const resolvers = {
         if (err) return console.log(err);
 
         const post = new Post({
-          author: req.userId,
+          name: req.userId,
           title: details.title,
           body: details.body,
         });
