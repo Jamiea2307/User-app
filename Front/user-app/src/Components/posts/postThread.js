@@ -2,8 +2,7 @@ import { useParams } from "react-router";
 import { GET_THREAD } from "../../Queries/posts";
 import { useQuery } from "@apollo/client";
 import { DisplayContainer } from "../../Styles/postDisplay";
-
-import PostDisplay from "./postDisplay";
+import ThreadContainer from "./threadContainer";
 
 const PostThread = () => {
   let { id } = useParams();
@@ -12,14 +11,12 @@ const PostThread = () => {
     variables: { postId: id },
   });
 
-  console.log(data);
-
   if (loading) return <div>...Loading</div>;
   if (error) return <div>error</div>;
 
   return (
     <DisplayContainer>
-      <PostDisplay post={data.getThread} />
+      <ThreadContainer post={data.getThread} />
     </DisplayContainer>
   );
 };

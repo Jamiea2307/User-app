@@ -40,8 +40,6 @@ const resolvers = {
         };
       });
 
-      console.log(sortedPosts);
-
       return sortedPosts;
     },
     getUserPosts: async (_, details, { req }) => {
@@ -85,8 +83,6 @@ const resolvers = {
         body: postDetails.body,
         date: postDetails.dateAdded.toISOString(),
       };
-
-      console.log(postDetails.dateAdded);
 
       return post;
     },
