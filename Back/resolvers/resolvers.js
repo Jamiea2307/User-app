@@ -1,5 +1,5 @@
-// const bcrypt = require("bcrypt");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
+// const bcrypt = require("bcryptjs");
 const { registerValidation } = require("../validation/Register");
 const { loginValidation } = require("../validation/Login");
 const { postValidation } = require("../validation/Post");
@@ -41,10 +41,9 @@ const resolvers = {
 
       return sortedPosts;
     },
-    getUserPosts: async (_, __, { req }) => {
+    getUserPosts: async (_, details, { req }) => {
       Verify(req);
-
-      const user = await User.findOne({ name: req.body.variables.userName });
+      const user = await User.findOne({ name: details.userName });
 
       if (!user || user === null) throw new UserInputError("User Not Found");
 
@@ -69,10 +68,14 @@ const resolvers = {
 
       return sortedPosts;
     },
-    comments: async (_, __, { req }) => {
+    getPost: async (_, details, { req }) => {
       Verify(req);
 
-      return true;
+      const post = await Post.findOne({
+        _id: details.postId,
+      });
+
+      return post;
     },
   },
   Mutation: {
@@ -105,6 +108,7 @@ const resolvers = {
         userDetails.password,
         user.password
       );
+
       if (!validPass) return new UserInputError("Email or password incorrect");
 
       const { accessToken, refreshToken } = createTokens(user);

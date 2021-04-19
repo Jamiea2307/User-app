@@ -23,3 +23,15 @@ export const GET_USER_POSTS = gql`
     }
   }
 `;
+
+export const GET_POST = gql`
+  query getPost($postId: String!) {
+    getPost(postId: $postId) {
+      id
+      name
+      title
+      body
+      date
+    }
+  }
+`;
