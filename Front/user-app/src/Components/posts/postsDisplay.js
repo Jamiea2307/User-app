@@ -1,35 +1,23 @@
 import { GET_POSTS } from "../../Queries/posts";
 import { useQuery } from "@apollo/client";
-import DateFormatter from "../Widgets/dateFormatter";
 // import Comment from "../posts/comments";
-import { DisplayContainer, PostContainer } from "../../Styles/postDisplay";
-import { Link } from "react-router-dom";
-import { pathNames } from "../../Constants/pathNames";
+import { DisplayContainer } from "../../Styles/postDisplay";
+import PostContainer from "./postContainer";
 
-const PostDisplay = () => {
+const PostsDisplay = () => {
   const { loading, data } = useQuery(GET_POSTS);
+
+  console.log(data);
 
   if (loading) return <div>Loading</div>;
 
   return (
     <DisplayContainer>
       {data.posts.map((post) => (
-        <PostContainer key={post.id}>
-          <div className="postDetailContainer">
-            <Link className="postUserLink" to={`${pathNames.user}${post.name}`}>
-              {post.name}
-            </Link>
-
-            <DateFormatter date={post.date} />
-          </div>
-          <Link className="postText" to={`${pathNames.postThread}${post.id}`}>
-            {post.title}
-          </Link>
-          {/* <Comment /> */}
-        </PostContainer>
+        <PostContainer post={post} key={post.id} />
       ))}
     </DisplayContainer>
   );
 };
 
-export default PostDisplay;
+export default PostsDisplay;

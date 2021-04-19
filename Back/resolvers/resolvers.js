@@ -22,22 +22,25 @@ const resolvers = {
     },
     posts: async (_, __, { req }) => {
       Verify(req);
+
       //needs to be updated to find posts in a certain way otherwise
       //can be removed as getUserPost has same func
       const posts = await Post.find().sort({ dateAdded: "desc" }).populate({
-        path: "author",
+        path: "name",
         select: "name",
       });
 
       const sortedPosts = posts.map((post) => {
         return {
           id: post.id,
-          name: post.author.name,
+          name: post.name.name,
           title: post.title,
           body: post.body,
           date: post.dateAdded.toISOString(),
         };
       });
+
+      console.log(sortedPosts);
 
       return sortedPosts;
     },
@@ -48,18 +51,18 @@ const resolvers = {
       if (!user || user === null) throw new UserInputError("User Not Found");
 
       const posts = await Post.find({
-        author: user._id,
+        name: user._id,
       })
         .sort({ dateAdded: "desc" })
         .populate({
-          path: "author",
+          path: "name",
           select: "name",
         });
 
       const sortedPosts = posts.map((post) => {
         return {
           id: post.id,
-          name: post.author.name,
+          name: post.name.name,
           title: post.title,
           body: post.body,
           date: post.dateAdded.toISOString(),
@@ -68,12 +71,22 @@ const resolvers = {
 
       return sortedPosts;
     },
-    getPost: async (_, details, { req }) => {
+    getThread: async (_, details, { req }) => {
       Verify(req);
 
-      const post = await Post.findOne({
-        _id: details.postId,
+      const postDetails = await Post.findById(details.postId).populate({
+        path: "name",
+        select: "name",
       });
+
+      const post = {
+        name: postDetails.name.name,
+        title: postDetails.title,
+        body: postDetails.body,
+        date: postDetails.dateAdded.toISOString(),
+      };
+
+      console.log(postDetails.dateAdded);
 
       return post;
     },
@@ -150,7 +163,7 @@ const resolvers = {
         if (err) return console.log(err);
 
         const post = new Post({
-          author: req.userId,
+          name: req.userId,
           title: details.title,
           body: details.body,
         });

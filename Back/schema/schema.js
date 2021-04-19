@@ -5,15 +5,16 @@ const typeDefs = gql`
     users: [User!]!
     user: User!
     posts: [Post]
-    getPost(postId: String!): Posts!
+    getThread(postId: String!): Post!
     getUserPosts(userName: String!): [Post]!
   }
 
-  type Posts {
-    author: String!
-    title: String!
-    body: String!
-  }
+  # type Posts {
+  #   name: String!
+  #   title: String!
+  #   body: String!
+  #   date: String!
+  # }
 
   type Post {
     id: String!
