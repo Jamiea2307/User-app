@@ -9,17 +9,17 @@ const typeDefs = gql`
     getUserPosts(userName: String!): [Post]!
   }
 
-  # type Posts {
-  #   name: String!
-  #   title: String!
-  #   body: String!
-  #   date: String!
-  # }
-
   type Post {
     id: String!
     name: String!
     title: String!
+    body: String!
+    date: String!
+  }
+
+  type Comment {
+    id: String!
+    name: String!
     body: String!
     date: String!
   }
@@ -41,7 +41,7 @@ const typeDefs = gql`
     createPost(title: String!, body: String!): Boolean!
     logoutUser: Boolean!
     invalidateTokens: Boolean!
-    createComment(content: String!): Boolean!
+    createComment(parent: String!, body: String!): Boolean!
   }
 `;
 

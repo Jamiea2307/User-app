@@ -1,5 +1,5 @@
-const bcrypt = require("bcrypt");
-// const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { registerValidation } = require("../validation/Register");
 const { loginValidation } = require("../validation/Login");
 const { postValidation } = require("../validation/Post");
@@ -78,6 +78,7 @@ const resolvers = {
       });
 
       const post = {
+        id: postDetails._id,
         name: postDetails.name.name,
         title: postDetails.title,
         body: postDetails.body,
@@ -173,6 +174,10 @@ const resolvers = {
     },
     createComment: async (__, details, { req }) => {
       Verify(req);
+
+      console.log(details);
+
+      return true;
     },
   },
 };

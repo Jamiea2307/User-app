@@ -15,8 +15,7 @@ const ThreadContainer = ({ post }) => {
       </div>
       <div className="postText">{post.title}</div>
       <div className="postText">{post.body}</div>
-
-      <Comment />
+      <Comment parentPostId={post.id} />
     </PostWrapper>
   );
 };

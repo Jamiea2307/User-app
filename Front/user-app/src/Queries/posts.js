@@ -27,6 +27,7 @@ export const GET_USER_POSTS = gql`
 export const GET_THREAD = gql`
   query getThread($postId: String!) {
     getThread(postId: $postId) {
+      id
       name
       title
       body
