@@ -22,7 +22,9 @@ const PostDisplay = () => {
 
             <DateFormatter date={post.date} />
           </div>
-          <div className="postText">{post.title}</div>
+          <Link className="postText" to={`${pathNames.postThread}${post.id}`}>
+            {post.title}
+          </Link>
           {/* <Comment /> */}
         </PostContainer>
       ))}

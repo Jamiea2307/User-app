@@ -34,5 +34,7 @@ export const PostContainer = styled.div`
 
   .postText {
     word-break: break-word;
+    text-decoration: none;
+    color: black;
   }
 `;
