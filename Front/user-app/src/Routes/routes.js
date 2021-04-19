@@ -13,6 +13,7 @@ import LoggedInRoute from "./RouteAuthorisation/loggedInRoute";
 import NavBar from "../Components/Widgets/NavBar";
 import User from "../Components/user/userPage";
 import PostThread from "../Components/posts/postThread";
+import { SiteWrapper } from "../Styles/home";
 
 export const UserContext = createContext();
 
@@ -32,19 +33,25 @@ export const Routes = () => {
           <PrivateRoute path={`${pathNames.user}:id`}>
             <NavBar />
             <PrivateRouteContainer>
-              <User />
+              <SiteWrapper>
+                <User />
+              </SiteWrapper>
             </PrivateRouteContainer>
           </PrivateRoute>
           <PrivateRoute path={pathNames.home}>
             <NavBar />
             <PrivateRouteContainer>
-              <HomePage />
+              <SiteWrapper>
+                <HomePage />
+              </SiteWrapper>
             </PrivateRouteContainer>
           </PrivateRoute>
           <PrivateRoute path={`${pathNames.postThread}:id`}>
             <NavBar />
             <PrivateRouteContainer>
-              <PostThread />
+              <SiteWrapper>
+                <PostThread />
+              </SiteWrapper>
             </PrivateRouteContainer>
           </PrivateRoute>
           <Route component={GenericNotFound} />

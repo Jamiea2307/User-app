@@ -1,13 +1,13 @@
-import { Homepage } from "../Styles/home";
+import { SiteWrapper } from "../Styles/home";
 import CreatePost from "./posts/createPost";
 import PostDisplay from "./posts/postsDisplay";
 
 const HomePage = () => {
   return (
-    <Homepage>
+    <div>
       <CreatePost />
       <PostDisplay />
-    </Homepage>
+    </div>
   );
 };
 
