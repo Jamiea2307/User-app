@@ -175,7 +175,23 @@ const resolvers = {
     createComment: async (__, details, { req }) => {
       Verify(req);
 
-      console.log(details);
+      const post = await Post.findOne({ _id: details.parent });
+
+      const comment = new Comments({
+        parentPost: details.parent,
+        name: req.userId,
+        body: details.body,
+      });
+
+      post.comments.push(comment._id);
+
+      post.save();
+      comment.save();
+
+      return true;
+    },
+    createReply: async (__, details, {}) => {
+      Verify(req);
 
       return true;
     },

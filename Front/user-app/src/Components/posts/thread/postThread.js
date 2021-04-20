@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
-import { GET_THREAD } from "../../Queries/posts";
+import { GET_THREAD } from "../../../Queries/posts";
 import { useQuery } from "@apollo/client";
-import { DisplayContainer } from "../../Styles/postDisplay";
+import { DisplayContainer } from "../../../Styles/postDisplay";
 import ThreadContainer from "./threadContainer";
 
 const PostThread = () => {

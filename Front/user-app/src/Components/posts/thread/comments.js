@@ -4,13 +4,13 @@ import {
   CommentTextArea,
   CommentControls,
   ReplyButton,
-} from "../../Styles/comments";
+} from "../../../Styles/comments";
 import {
   SubmitButton,
   CancelButton,
-} from "../../Styles/StandardWidgets/buttons";
+} from "../../../Styles/StandardWidgets/buttons";
 import { useMutation } from "@apollo/client";
-import { CREATE_COMMENT } from "../../Mutations/createComment";
+import { CREATE_COMMENT } from "../../../Mutations/comments";
 
 const Comment = ({ parentPostId }) => {
   const [addComment, setAddComment] = useState(false);

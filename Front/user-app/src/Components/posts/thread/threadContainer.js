@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { pathNames } from "../../Constants/pathNames";
-import { PostWrapper } from "../../Styles/postDisplay";
-import Comment from "../posts/comments";
-import DateFormatter from "../Widgets/dateFormatter";
+import { pathNames } from "../../../Constants/pathNames";
+import { PostWrapper } from "../../../Styles/postDisplay";
+import Comment from "./comments";
+import DateFormatter from "../../Widgets/dateFormatter";
 
 const ThreadContainer = ({ post }) => {
   return (

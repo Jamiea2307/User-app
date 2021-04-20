@@ -12,7 +12,7 @@ import PrivateRoute from "./RouteAuthorisation/privateRoute";
 import LoggedInRoute from "./RouteAuthorisation/loggedInRoute";
 import NavBar from "../Components/Widgets/NavBar";
 import User from "../Components/user/userPage";
-import PostThread from "../Components/posts/postThread";
+import PostThread from "../Components/posts/thread/postThread";
 import { SiteWrapper } from "../Styles/home";
 
 export const UserContext = createContext();
