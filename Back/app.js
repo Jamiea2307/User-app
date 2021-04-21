@@ -6,7 +6,7 @@ const resolvers = require("./resolvers/resolvers");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
-const User = require("./model/User");
+const User = require("./models/User");
 const createTokens = require("./authorisation/auth");
 var cors = require("cors");
 

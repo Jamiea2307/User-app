@@ -6,9 +6,9 @@ const { postValidation } = require("../validation/Post");
 const { UserInputError } = require("apollo-server-express");
 const createTokens = require("../authorisation/auth");
 const Verify = require("../authorisation/verification");
-const User = require("../model/User");
-const Post = require("../model/Post");
-const Comments = require("../model/Comment");
+const User = require("../models/User");
+const Post = require("../models/Post");
+const Comments = require("../models/Comment");
 
 const resolvers = {
   Query: {
@@ -86,6 +86,11 @@ const resolvers = {
       };
 
       return post;
+    },
+    getComments: async (_, details, { req }) => {
+      verify(req);
+
+      return true;
     },
   },
   Mutation: {

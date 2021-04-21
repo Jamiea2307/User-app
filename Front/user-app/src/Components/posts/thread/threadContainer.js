@@ -3,6 +3,7 @@ import { pathNames } from "../../../Constants/pathNames";
 import { PostWrapper } from "../../../Styles/postDisplay";
 import Comment from "./comments";
 import DateFormatter from "../../Widgets/dateFormatter";
+import CommentDisplay from "./commentsDisplay";
 
 const ThreadContainer = ({ post }) => {
   return (
@@ -16,6 +17,7 @@ const ThreadContainer = ({ post }) => {
       <div className="postText">{post.title}</div>
       <div className="postText">{post.body}</div>
       <Comment parentPostId={post.id} />
+      <CommentDisplay parentPostId={post.id} />
     </PostWrapper>
   );
 };
