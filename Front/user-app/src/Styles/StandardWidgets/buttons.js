@@ -6,13 +6,16 @@ export const ButtonStandard = styled.button`
   padding: 5px 10px;
   margin: 0.3rem;
 
-  &:hover {
+  &:hover:enabled {
     cursor: pointer;
     background: #828282;
   }
-  &:focus {
+  &:focus:enabled {
     outline: none;
     border: 2px solid darkgray;
+  }
+  &:disabled {
+    background: lightgray;
   }
 `;
 

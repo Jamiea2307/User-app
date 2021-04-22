@@ -88,7 +88,23 @@ const resolvers = {
       return post;
     },
     getComments: async (_, details, { req }) => {
-      verify(req);
+      Verify(req);
+
+      // const parent = await Post.findOne({ _id: details.parentPost }).populate(
+      //   "comments"
+      // );
+      const parent = await Post.findOne({ _id: details.parentPost }).populate({
+        path: "comments",
+        populate: {
+          path: "name",
+          select: "name",
+        },
+      });
+
+      // const comments = parent.comments.map(comment => {
+
+      // })
+      console.log(parent.comments);
 
       return true;
     },

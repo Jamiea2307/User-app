@@ -11,7 +11,6 @@ export const ReplyButton = styled.button`
 
 export const CommentArea = styled.form`
   padding: 1rem;
-  /* width: 30rem; */
   margin-top: 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.16);
 `;

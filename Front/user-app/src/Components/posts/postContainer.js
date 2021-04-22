@@ -4,7 +4,6 @@ import { PostWrapper } from "../../Styles/postDisplay";
 import DateFormatter from "../Widgets/dateFormatter";
 
 const PostContainer = ({ post }) => {
-  console.log(post);
   return (
     <PostWrapper>
       <div className="postDetailContainer">

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const GET_Comments = gql`
-  query getComments {
-    getComments {
+export const GET_COMMENTS = gql`
+  query getComments($parentPost: String!) {
+    getComments(parentPost: $parentPost) {
       id
       name
       body

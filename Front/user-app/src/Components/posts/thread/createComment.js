@@ -14,7 +14,7 @@ import { PostContext } from "./threadContainer";
 
 const CreateComment = ({ setDisplay }) => {
   const [commentText, setCommentText] = useState("");
-  const [createComment] = useMutation(CREATE_COMMENT);
+  const [createComment, { loading, error }] = useMutation(CREATE_COMMENT);
   const parentPostId = useContext(PostContext);
 
   const submitComment = async (e) => {
@@ -29,7 +29,7 @@ const CreateComment = ({ setDisplay }) => {
       setDisplay(false);
       setCommentText("");
     } catch (err) {
-      console.log(err.message);
+      console.log(error);
     }
   };
 
@@ -47,6 +47,7 @@ const CreateComment = ({ setDisplay }) => {
           onClick={(e) => {
             submitComment(e);
           }}
+          disabled={loading}
         >
           Submit
         </SubmitButton>
@@ -55,6 +56,7 @@ const CreateComment = ({ setDisplay }) => {
             e.preventDefault();
             setDisplay(false);
           }}
+          disabled={loading}
         >
           Cancel
         </CancelButton>
