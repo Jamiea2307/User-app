@@ -5,7 +5,7 @@ import { pathNames } from "../../Constants/pathNames";
 const RegisterGratitude = () => {
   return (
     <div>
-      Thank you for registering
+      {registrationData.successText}
       <Link className="pageLink" to={pathNames.login}>
         {registrationData.linkText}
       </Link>

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { LoginRegisterPromptContainer } from "../../Styles/loginRegisterPromptStyles";
 import { pathNames } from "../../Constants/pathNames";
 
+// PAGE CURRENTLY NOT IN USE
+
 const LoginRegisterPrompt = () => {
   return (
     <LoginRegisterPromptContainer>

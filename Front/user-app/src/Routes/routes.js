@@ -4,6 +4,7 @@ import { createContext } from "react";
 import { GET_USER } from "../Queries/users";
 import { pathNames } from "../Constants/pathNames";
 import { PrivateRouteContainer } from "../Styles/privateRoute";
+import { SiteWrapper } from "../Styles/home";
 import Login from "../Components/userEntry/login";
 import Register from "../Components/userEntry/register";
 import HomePage from "../Components/home";
@@ -13,7 +14,6 @@ import LoggedInRoute from "./RouteAuthorisation/loggedInRoute";
 import NavBar from "../Components/Widgets/NavBar";
 import User from "../Components/user/userPage";
 import PostThread from "../Components/posts/thread/postThread";
-import { SiteWrapper } from "../Styles/home";
 
 export const UserContext = createContext();
 

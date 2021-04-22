@@ -23,3 +23,7 @@ export const post = {
 export const navBar = {
   logout: "Logout",
 };
+
+export const userDetails = {
+  activity: "Showing activity of",
+};

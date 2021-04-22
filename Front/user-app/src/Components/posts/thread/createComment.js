@@ -1,21 +1,21 @@
-import { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { useContext, useState } from "react";
+import { CREATE_COMMENT } from "../../../Mutations/comments";
 import {
   CommentArea,
-  CommentTextArea,
   CommentControls,
-  ReplyButton,
+  CommentTextArea,
 } from "../../../Styles/comments";
 import {
-  SubmitButton,
   CancelButton,
+  SubmitButton,
 } from "../../../Styles/StandardWidgets/buttons";
-import { useMutation } from "@apollo/client";
-import { CREATE_COMMENT } from "../../../Mutations/comments";
+import { PostContext } from "./threadContainer";
 
-const Comment = ({ parentPostId }) => {
-  const [addComment, setAddComment] = useState(false);
+const CreateComment = ({ setDisplay }) => {
   const [commentText, setCommentText] = useState("");
   const [createComment] = useMutation(CREATE_COMMENT);
+  const parentPostId = useContext(PostContext);
 
   const submitComment = async (e) => {
     e.preventDefault();
@@ -26,14 +26,14 @@ const Comment = ({ parentPostId }) => {
           body: commentText,
         },
       });
-      setAddComment(false);
+      setDisplay(false);
       setCommentText("");
     } catch (err) {
       console.log(err.message);
     }
   };
 
-  return addComment ? (
+  return (
     <CommentArea>
       <CommentTextArea
         value={commentText}
@@ -53,23 +53,14 @@ const Comment = ({ parentPostId }) => {
         <CancelButton
           onClick={(e) => {
             e.preventDefault();
-            setAddComment(false);
+            setDisplay(false);
           }}
         >
           Cancel
         </CancelButton>
       </CommentControls>
     </CommentArea>
-  ) : (
-    <ReplyButton
-      onClick={(e) => {
-        e.preventDefault();
-        setAddComment(true);
-      }}
-    >
-      Reply
-    </ReplyButton>
   );
 };
 
-export default Comment;
+export default CreateComment;

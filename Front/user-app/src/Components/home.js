@@ -1,4 +1,3 @@
-import { SiteWrapper } from "../Styles/home";
 import CreatePost from "./posts/createPost";
 import PostDisplay from "./posts/postsDisplay";
 

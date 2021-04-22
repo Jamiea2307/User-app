@@ -3,6 +3,7 @@
 import { GET_USER_POSTS } from "../../Queries/posts";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router";
+import { userDetails } from "../../Constants/userContent";
 
 const User = () => {
   //   const { data } = useContext(UserContext);
@@ -18,7 +19,9 @@ const User = () => {
 
   return (
     <div style={{ marginTop: "3rem" }}>
-      <div>Showing activity of {id}</div>
+      <div>
+        {userDetails.activity} {id}
+      </div>
       {data.getUserPosts.map((post) => (
         <div key={post.id}>
           {post.name}
