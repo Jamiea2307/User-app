@@ -1,12 +1,12 @@
 require("dotenv").config();
-const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
+const express = require("express");
 const typeDefs = require("./schema/schema");
 const resolvers = require("./resolvers/resolvers");
-const mongoose = require("mongoose");
-const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const User = require("./model/User");
+const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const createTokens = require("./authorisation/auth");
 var cors = require("cors");
 
