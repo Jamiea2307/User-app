@@ -1,14 +1,14 @@
-const bcrypt = require("bcrypt");
-// const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { registerValidation } = require("../validation/Register");
 const { loginValidation } = require("../validation/Login");
 const { postValidation } = require("../validation/Post");
 const { UserInputError } = require("apollo-server-express");
 const createTokens = require("../authorisation/auth");
 const Verify = require("../authorisation/verification");
-const User = require("../model/User");
-const Post = require("../model/Post");
-const Comments = require("../model/Comment");
+const User = require("../models/User");
+const Post = require("../models/Post");
+const Comments = require("../models/Comment");
 
 const resolvers = {
   Query: {
@@ -78,6 +78,7 @@ const resolvers = {
       });
 
       const post = {
+        id: postDetails._id,
         name: postDetails.name.name,
         title: postDetails.title,
         body: postDetails.body,
@@ -85,6 +86,11 @@ const resolvers = {
       };
 
       return post;
+    },
+    getComments: async (_, details, { req }) => {
+      verify(req);
+
+      return true;
     },
   },
   Mutation: {
@@ -173,6 +179,26 @@ const resolvers = {
     },
     createComment: async (__, details, { req }) => {
       Verify(req);
+
+      const post = await Post.findOne({ _id: details.parent });
+
+      const comment = new Comments({
+        parentPost: details.parent,
+        name: req.userId,
+        body: details.body,
+      });
+
+      post.comments.push(comment._id);
+
+      post.save();
+      comment.save();
+
+      return true;
+    },
+    createReply: async (__, details, {}) => {
+      Verify(req);
+
+      return true;
     },
   },
 };

@@ -16,7 +16,6 @@ const PostContainer = ({ post }) => {
       <Link className="postText" to={`${pathNames.postThread}${post.id}`}>
         {post.title}
       </Link>
-      {/* <Comment /> */}
     </PostWrapper>
   );
 };
