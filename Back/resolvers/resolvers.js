@@ -90,9 +90,6 @@ const resolvers = {
     getComments: async (_, details, { req }) => {
       Verify(req);
 
-      // const parent = await Post.findOne({ _id: details.parentPost }).populate(
-      //   "comments"
-      // );
       const parent = await Post.findOne({ _id: details.parentPost }).populate({
         path: "comments",
         populate: {
@@ -101,12 +98,9 @@ const resolvers = {
         },
       });
 
-      // const comments = parent.comments.map(comment => {
-
-      // })
       console.log(parent.comments);
 
-      return true;
+      return parent.comments;
     },
   },
   Mutation: {
@@ -193,7 +187,7 @@ const resolvers = {
 
       return true;
     },
-    createComment: async (__, details, { req }) => {
+    createCommentThread: async (__, details, { req }) => {
       Verify(req);
 
       const post = await Post.findOne({ _id: details.parent });

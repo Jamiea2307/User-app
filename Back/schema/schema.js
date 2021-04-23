@@ -8,7 +8,7 @@ const typeDefs = gql`
     getThread(postId: String!): Post!
     getUserPosts(userName: String!): [Post]!
     # getComments(parentPost: String!): [Comment!]
-    getComments(parentPost: String!): [Comment!]
+    getComments(parentPost: String!): [Comment!]!
   }
 
   type Mutation {
@@ -17,7 +17,7 @@ const typeDefs = gql`
     createPost(title: String!, body: String!): Boolean!
     logoutUser: Boolean!
     invalidateTokens: Boolean!
-    createComment(parent: String!, body: String!): Boolean!
+    createCommentThread(parent: String!, body: String!): Boolean!
     createReply(
       parentPost: String!
       parentComment: String!
@@ -34,10 +34,17 @@ const typeDefs = gql`
   }
 
   type Comment {
+    _id: String!
+    parentPost: String!
+    children: [String!]
+    name: UserDetails!
+    body: String!
+    dateAdded: String!
+  }
+
+  type UserDetails {
     id: String!
     name: String!
-    body: String!
-    date: String!
   }
 
   type User {

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { ReplyButton } from "../../../Styles/comments";
-import CreateComment from "./createComment";
+import CreateCommentThread from "./createCommentThread";
 
 const Comment = () => {
   const [addComment, setAddComment] = useState(false);
 
   return addComment ? (
-    <CreateComment
+    <CreateCommentThread
       setDisplay={(e) => {
         setAddComment(e);
       }}

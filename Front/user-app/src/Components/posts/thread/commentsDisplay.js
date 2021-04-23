@@ -9,6 +9,10 @@ const CommentDisplay = () => {
     variables: { parentPost: parentPostId },
   });
 
+  if (loading) return <div>Loading....</div>;
+
+  console.log(data.getComments);
+
   return (
     <div
       style={{ paddingTop: "3rem", borderTop: "1px solid rgba(0,0,0,0.16)" }}
