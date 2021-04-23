@@ -7,7 +7,6 @@ const typeDefs = gql`
     posts: [Post]
     getThread(postId: String!): Post!
     getUserPosts(userName: String!): [Post]!
-    # getComments(parentPost: String!): [Comment!]
     getComments(parentPost: String!): [Comment!]!
   }
 
@@ -34,18 +33,19 @@ const typeDefs = gql`
   }
 
   type Comment {
-    _id: String!
+    id: String!
     parentPost: String!
+    parentComment: String
     children: [String!]
-    name: UserDetails!
+    name: String!
     body: String!
-    dateAdded: String!
+    date: String!
   }
 
-  type UserDetails {
-    id: String!
-    name: String!
-  }
+  # type UserDetails {
+  #   id: String!
+  #   name: String!
+  # }
 
   type User {
     name: String!

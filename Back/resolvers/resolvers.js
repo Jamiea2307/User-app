@@ -98,9 +98,22 @@ const resolvers = {
         },
       });
 
-      console.log(parent.comments);
+      // console.log(parent);
 
-      return parent.comments;
+      const sortedPosts = parent.comments.map((post) => {
+        return {
+          children: [],
+          id: post._id,
+          parentPost: post.parentPost,
+          name: post.name.name,
+          body: post.body,
+          date: post.dateAdded.toISOString(),
+        };
+      });
+
+      console.log(sortedPosts);
+
+      return sortedPosts;
     },
   },
   Mutation: {
@@ -149,8 +162,6 @@ const resolvers = {
       }
 
       await User.updateOne({ _id: req.userId }, { $inc: { count: 1 } });
-
-      // await user.save();
 
       return true;
     },
@@ -205,11 +216,11 @@ const resolvers = {
 
       return true;
     },
-    createReply: async (__, details, {}) => {
-      Verify(req);
+    // createReply: async (__, details, {}) => {
+    //   Verify(req);
 
-      return true;
-    },
+    //   return true;
+    // },
   },
 };
 

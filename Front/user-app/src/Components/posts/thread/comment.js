@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ReplyButton } from "../../../Styles/comments";
+import { comment } from "../../../Constants/userContent";
 import CreateCommentThread from "./createCommentThread";
 
 const Comment = () => {
@@ -18,7 +19,7 @@ const Comment = () => {
         setAddComment(true);
       }}
     >
-      Reply
+      {comment.reply}
     </ReplyButton>
   );
 };

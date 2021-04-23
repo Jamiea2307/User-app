@@ -27,3 +27,7 @@ export const navBar = {
 export const userDetails = {
   activity: "Showing activity of",
 };
+
+export const comment = {
+  reply: "Reply",
+};
