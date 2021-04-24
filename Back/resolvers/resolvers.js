@@ -98,20 +98,18 @@ const resolvers = {
         },
       });
 
-      // console.log(parent);
-
-      const sortedPosts = parent.comments.map((post) => {
+      const sortedPosts = parent.comments.map((comment) => {
         return {
-          children: [],
-          id: post._id,
-          parentPost: post.parentPost,
-          name: post.name.name,
-          body: post.body,
-          date: post.dateAdded.toISOString(),
+          children: [...comment.children],
+          id: comment._id,
+          parentPost: comment.parentPost,
+          name: comment.name.name,
+          body: comment.body,
+          date: comment.dateAdded.toISOString(),
         };
       });
 
-      console.log(sortedPosts);
+      console.log("These are sorted posts = ", sortedPosts);
 
       return sortedPosts;
     },
@@ -201,7 +199,7 @@ const resolvers = {
     createCommentThread: async (__, details, { req }) => {
       Verify(req);
 
-      const post = await Post.findOne({ _id: details.parent });
+      let post;
 
       const comment = new Comments({
         parentPost: details.parent,
@@ -209,18 +207,19 @@ const resolvers = {
         body: details.body,
       });
 
-      post.comments.push(comment._id);
+      if (!details.parentComment) {
+        post = await Post.findOne({ _id: details.parentPost });
+        post.comments.push(comment._id);
+      } else {
+        post = await Comments.findOne({ _id: details.parentComment });
+        post.children.push(comment);
+      }
 
-      post.save();
-      comment.save();
+      await post.save();
+      // comment.save();
 
       return true;
     },
-    // createReply: async (__, details, {}) => {
-    //   Verify(req);
-
-    //   return true;
-    // },
   },
 };
 

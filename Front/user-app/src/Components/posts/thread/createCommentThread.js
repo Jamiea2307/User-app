@@ -12,9 +12,9 @@ import {
 } from "../../../Styles/StandardWidgets/buttons";
 import { PostContext } from "./threadContainer";
 
-const CreateCommentThread = ({ setDisplay }) => {
+const CreateCommentThread = ({ setDisplay, parentComment }) => {
   const [commentText, setCommentText] = useState("");
-  const [createCommentThread, { loading, error }] = useMutation(CREATE_COMMENT);
+  const [createCommentThread, { loading }] = useMutation(CREATE_COMMENT);
   const parentPostId = useContext(PostContext);
 
   const submitComment = async (e) => {
@@ -22,14 +22,15 @@ const CreateCommentThread = ({ setDisplay }) => {
     try {
       await createCommentThread({
         variables: {
-          parent: parentPostId,
+          parentPost: parentPostId,
+          parentComment: parentComment,
           body: commentText,
         },
       });
       setDisplay(false);
       setCommentText("");
     } catch (err) {
-      console.log(error);
+      console.log(err);
     }
   };
 

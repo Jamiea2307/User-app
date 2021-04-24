@@ -7,7 +7,9 @@ export const GET_COMMENTS = gql`
       name
       body
       date
-      children
+      children {
+        __typename
+      }
     }
   }
 `;

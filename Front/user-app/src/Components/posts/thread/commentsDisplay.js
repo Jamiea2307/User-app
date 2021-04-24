@@ -7,9 +7,12 @@ import Comment from "./comment";
 
 const CommentDisplay = () => {
   const parentPostId = useContext(PostContext);
-  const { loading, data } = useQuery(GET_COMMENTS, {
+  const { loading, data, error } = useQuery(GET_COMMENTS, {
     variables: { parentPost: parentPostId },
   });
+
+  console.log(data);
+  console.log(error);
 
   if (loading) return <div>Loading....</div>;
 
@@ -22,7 +25,7 @@ const CommentDisplay = () => {
           {comment.name}
           {comment.body}
           <DateFormatter date={comment.date} />
-          <Comment />
+          <Comment parentComment={comment.id} />
         </div>
       ))}
     </div>

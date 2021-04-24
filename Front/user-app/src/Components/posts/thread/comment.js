@@ -3,7 +3,7 @@ import { ReplyButton } from "../../../Styles/comments";
 import { comment } from "../../../Constants/userContent";
 import CreateCommentThread from "./createCommentThread";
 
-const Comment = () => {
+const Comment = ({ parentComment }) => {
   const [addComment, setAddComment] = useState(false);
 
   return addComment ? (
@@ -11,6 +11,7 @@ const Comment = () => {
       setDisplay={(e) => {
         setAddComment(e);
       }}
+      parentComment={parentComment}
     />
   ) : (
     <ReplyButton

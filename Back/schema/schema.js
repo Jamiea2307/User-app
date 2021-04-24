@@ -16,10 +16,9 @@ const typeDefs = gql`
     createPost(title: String!, body: String!): Boolean!
     logoutUser: Boolean!
     invalidateTokens: Boolean!
-    createCommentThread(parent: String!, body: String!): Boolean!
-    createReply(
+    createCommentThread(
       parentPost: String!
-      parentComment: String!
+      parentComment: String
       body: String!
     ): Boolean!
   }
@@ -36,16 +35,11 @@ const typeDefs = gql`
     id: String!
     parentPost: String!
     parentComment: String
-    children: [String!]
+    children: [Comment!]
     name: String!
     body: String!
     date: String!
   }
-
-  # type UserDetails {
-  #   id: String!
-  #   name: String!
-  # }
 
   type User {
     name: String!
