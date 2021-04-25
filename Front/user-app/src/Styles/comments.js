@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export const ReplyButton = styled.button`
+export const CommentButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
   font-size: 0.7rem;
   color: grey;
   padding: 0;
+  margin-right: 0.5rem;
 `;
 
 export const CommentArea = styled.form`

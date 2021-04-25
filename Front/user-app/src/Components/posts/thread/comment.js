@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ReplyButton } from "../../../Styles/comments";
 import { comment } from "../../../Constants/userContent";
 import CreateCommentThread from "./createCommentThread";
+import CommentControls from "./commentControls";
 
 const Comment = ({ parentComment }) => {
   const [addComment, setAddComment] = useState(false);
@@ -14,14 +15,11 @@ const Comment = ({ parentComment }) => {
       parentComment={parentComment}
     />
   ) : (
-    <ReplyButton
-      onClick={(e) => {
-        e.preventDefault();
-        setAddComment(true);
+    <CommentControls
+      setDisplay={(e) => {
+        setAddComment(e);
       }}
-    >
-      {comment.reply}
-    </ReplyButton>
+    />
   );
 };
 
