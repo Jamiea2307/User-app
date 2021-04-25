@@ -1,25 +1,28 @@
-import { useState } from "react";
-import { ReplyButton } from "../../../Styles/comments";
-import { comment } from "../../../Constants/userContent";
-import CreateCommentThread from "./createCommentThread";
+import DateFormatter from "../../Widgets/dateFormatter";
 import CommentControls from "./commentControls";
+import { useLazyQuery } from "@apollo/client";
+import { GET_MORE_COMMENTS } from "../../../Queries/comments";
 
-const Comment = ({ parentComment }) => {
-  const [addComment, setAddComment] = useState(false);
+const Comment = ({ comment }) => {
+  const [getMoreComments, { loading, data }] = useLazyQuery(GET_MORE_COMMENTS);
 
-  return addComment ? (
-    <CreateCommentThread
-      setDisplay={(e) => {
-        setAddComment(e);
-      }}
-      parentComment={parentComment}
-    />
-  ) : (
-    <CommentControls
-      setDisplay={(e) => {
-        setAddComment(e);
-      }}
-    />
+  return (
+    <div key={comment.id}>
+      {comment.name}
+      {comment.body}
+      <DateFormatter date={comment.date} />
+      <CommentControls
+        parentComment={comment.id}
+        moreComments={() =>
+          getMoreComments({ variables: { parentComment: comment.id } })
+        }
+      />
+      {data &&
+        !loading &&
+        data.getMoreComments.map((comment) => (
+          <Comment comment={comment} key={comment.id} />
+        ))}
+    </div>
   );
 };
 

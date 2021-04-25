@@ -7,7 +7,17 @@ export const GET_COMMENTS = gql`
       name
       body
       date
-      # children
+    }
+  }
+`;
+
+export const GET_MORE_COMMENTS = gql`
+  query getMoreComments($parentComment: String!) {
+    getMoreComments(parentComment: $parentComment) {
+      id
+      name
+      body
+      date
     }
   }
 `;

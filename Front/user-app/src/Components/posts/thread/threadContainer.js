@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { pathNames } from "../../../Constants/pathNames";
 import { PostWrapper } from "../../../Styles/postDisplay";
-import Comment from "./comment";
+import CommentControls from "./commentControls";
 import DateFormatter from "../../Widgets/dateFormatter";
 import CommentDisplay from "./commentsDisplay";
 import { createContext } from "react";
@@ -20,7 +20,7 @@ const ThreadContainer = ({ post }) => {
       <div className="postText">{post.title}</div>
       <div className="postText">{post.body}</div>
       <PostContext.Provider value={post.id}>
-        <Comment />
+        <CommentControls />
         <CommentDisplay />
       </PostContext.Provider>
     </PostWrapper>

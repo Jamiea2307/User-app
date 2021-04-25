@@ -1,18 +1,35 @@
-import { comment } from "../../../Constants/userContent";
+import { useState } from "react";
+import CreateCommentThread from "./createCommentThread";
 import { CommentButton } from "../../../Styles/comments";
+import { comment } from "../../../Constants/userContent";
 
-const CommentControls = ({ setDisplay }) => {
-  return (
+const CommentControls = ({ parentComment, moreComments }) => {
+  const [addComment, setAddComment] = useState(false);
+
+  return addComment ? (
+    <CreateCommentThread
+      setDisplay={(e) => {
+        setAddComment(e);
+      }}
+      parentComment={parentComment}
+    />
+  ) : (
     <div>
       <CommentButton
         onClick={(e) => {
           e.preventDefault();
-          setDisplay(true);
+          setAddComment(true);
         }}
       >
         {comment.reply}
       </CommentButton>
-      <CommentButton>Show more comments</CommentButton>
+      <CommentButton
+        onClick={() => {
+          moreComments();
+        }}
+      >
+        Show Replies
+      </CommentButton>
     </div>
   );
 };

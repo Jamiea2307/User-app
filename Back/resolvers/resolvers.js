@@ -110,6 +110,31 @@ const resolvers = {
 
       return sortedPosts;
     },
+    getMoreComments: async (_, details, { req }) => {
+      Verify(req);
+
+      const parentComment = await Comments.findOne({
+        _id: details.parentComment,
+      }).populate({
+        path: "children",
+        populate: {
+          path: "name",
+          select: "name",
+        },
+      });
+
+      const sortedPosts = parentComment.children.map((comment) => {
+        return {
+          id: comment._id,
+          parentPost: comment.parentPost,
+          name: comment.name.name,
+          body: comment.body,
+          date: comment.dateAdded.toISOString(),
+        };
+      });
+
+      return sortedPosts;
+    },
   },
   Mutation: {
     createUser: async (__, details) => {

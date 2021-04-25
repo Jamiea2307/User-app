@@ -8,6 +8,7 @@ const typeDefs = gql`
     getThread(postId: String!): Post!
     getUserPosts(userName: String!): [Post]!
     getPostComments(parentPost: String!): [Comment!]!
+    getMoreComments(parentComment: String!): [Comment]
   }
 
   type Mutation {
@@ -35,7 +36,6 @@ const typeDefs = gql`
     id: String!
     parentPost: String!
     parentComment: String
-    # children: []
     name: String!
     body: String!
     date: String!
