@@ -7,8 +7,7 @@ const commentSchema = new schema({
   name: { type: schema.Types.ObjectId, ref: "User" },
   body: { type: String, required: true },
   dateAdded: { type: Date, default: Date.now },
-  // children: [{ type: schema.Types.ObjectId, ref: "Comment" }],
-  children: [this],
+  children: [{ type: schema.Types.ObjectId, ref: "Comment" }],
 });
 
 module.exports = mongoose.model("Comment", commentSchema);

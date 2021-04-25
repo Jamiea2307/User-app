@@ -87,7 +87,7 @@ const resolvers = {
 
       return post;
     },
-    getComments: async (_, details, { req }) => {
+    getPostComments: async (_, details, { req }) => {
       Verify(req);
 
       const parent = await Post.findOne({ _id: details.parentPost }).populate({
@@ -100,7 +100,6 @@ const resolvers = {
 
       const sortedPosts = parent.comments.map((comment) => {
         return {
-          children: [...comment.children],
           id: comment._id,
           parentPost: comment.parentPost,
           name: comment.name.name,
@@ -108,8 +107,6 @@ const resolvers = {
           date: comment.dateAdded.toISOString(),
         };
       });
-
-      console.log("These are sorted posts = ", sortedPosts);
 
       return sortedPosts;
     },
@@ -201,22 +198,29 @@ const resolvers = {
 
       let post;
 
+      console.log(details);
+
       const comment = new Comments({
-        parentPost: details.parent,
+        parentPost: details.parentPost,
         name: req.userId,
         body: details.body,
       });
+
+      console.log(comment);
 
       if (!details.parentComment) {
         post = await Post.findOne({ _id: details.parentPost });
         post.comments.push(comment._id);
       } else {
         post = await Comments.findOne({ _id: details.parentComment });
-        post.children.push(comment);
+        comment.parentComment = details.parentComment;
+        post.children.push(comment._id);
       }
 
-      await post.save();
-      // comment.save();
+      await post.save((err) => {
+        if (err) return console.log(err);
+        comment.save();
+      });
 
       return true;
     },

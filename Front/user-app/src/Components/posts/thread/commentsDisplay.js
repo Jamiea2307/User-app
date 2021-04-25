@@ -11,16 +11,14 @@ const CommentDisplay = () => {
     variables: { parentPost: parentPostId },
   });
 
-  console.log(data);
-  console.log(error);
-
   if (loading) return <div>Loading....</div>;
+  console.log(data);
 
   return (
     <div
       style={{ paddingTop: "3rem", borderTop: "1px solid rgba(0,0,0,0.16)" }}
     >
-      {data.getComments.map((comment) => (
+      {data.getPostComments.map((comment) => (
         <div key={comment.id}>
           {comment.name}
           {comment.body}
