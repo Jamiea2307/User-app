@@ -223,15 +223,11 @@ const resolvers = {
 
       let post;
 
-      console.log(details);
-
       const comment = new Comments({
         parentPost: details.parentPost,
         name: req.userId,
         body: details.body,
       });
-
-      console.log(comment);
 
       if (!details.parentComment) {
         post = await Post.findOne({ _id: details.parentPost });

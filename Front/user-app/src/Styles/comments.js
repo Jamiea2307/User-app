@@ -26,3 +26,19 @@ export const CommentTextArea = styled.textarea`
 export const CommentControls = styled.div`
   display: flex;
 `;
+
+export const CommentWrapper = styled.div`
+  padding-top: 3rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.16);
+
+  .commentGroup {
+    padding-bottom: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
+  }
+`;
+
+export const SingleComment = styled.div`
+  padding-left: 0.5rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.16);
+  padding-top: 0.5rem;
+`;
