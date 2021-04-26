@@ -20,7 +20,7 @@ const ThreadContainer = ({ post }) => {
       <div className="postText">{post.title}</div>
       <div className="postText">{post.body}</div>
       <PostContext.Provider value={post.id}>
-        <CommentControls />
+        <CommentControls type="Thread" />
         <CommentDisplay />
       </PostContext.Provider>
     </PostWrapper>

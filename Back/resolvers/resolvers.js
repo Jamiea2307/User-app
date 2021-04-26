@@ -133,6 +133,8 @@ const resolvers = {
         };
       });
 
+      console.log(sortedPosts);
+
       return sortedPosts;
     },
   },

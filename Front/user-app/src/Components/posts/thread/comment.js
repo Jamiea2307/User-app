@@ -9,8 +9,10 @@ const Comment = ({ comment }) => {
 
   return (
     <SingleComment key={comment.id}>
-      {comment.name}
-      {comment.body}
+      <div className="commentDetailContainer">
+        {comment.name}
+        {comment.body}
+      </div>
       <DateFormatter date={comment.date} />
       <CommentControls
         parentComment={comment.id}

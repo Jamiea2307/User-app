@@ -3,7 +3,7 @@ import CreateCommentThread from "./createCommentThread";
 import { CommentButton } from "../../../Styles/comments";
 import { comment } from "../../../Constants/userContent";
 
-const CommentControls = ({ parentComment, moreComments }) => {
+const CommentControls = ({ parentComment, moreComments, type }) => {
   const [addComment, setAddComment] = useState(false);
 
   return addComment ? (
@@ -23,13 +23,15 @@ const CommentControls = ({ parentComment, moreComments }) => {
       >
         {comment.reply}
       </CommentButton>
-      <CommentButton
-        onClick={() => {
-          moreComments();
-        }}
-      >
-        Show Replies
-      </CommentButton>
+      {!type ? (
+        <CommentButton
+          onClick={() => {
+            moreComments();
+          }}
+        >
+          Show Replies
+        </CommentButton>
+      ) : null}
     </div>
   );
 };

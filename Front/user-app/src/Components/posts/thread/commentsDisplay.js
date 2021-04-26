@@ -16,8 +16,8 @@ const CommentDisplay = () => {
   return (
     <CommentWrapper>
       {data.getPostComments.map((comment) => (
-        <div className="commentGroup">
-          <Comment comment={comment} key={comment.id} />
+        <div className="commentGroup" key={comment.id}>
+          <Comment comment={comment} />
         </div>
       ))}
     </CommentWrapper>
