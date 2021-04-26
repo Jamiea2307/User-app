@@ -17,7 +17,14 @@ const CommentDisplay = () => {
       style={{ paddingTop: "3rem", borderTop: "1px solid rgba(0,0,0,0.16)" }}
     >
       {data.getPostComments.map((comment) => (
-        <Comment comment={comment} key={comment.id} />
+        <div
+          style={{
+            paddingBottom: "1rem",
+            borderTop: "1px solid rgba(0,0,0,0.16)",
+          }}
+        >
+          <Comment comment={comment} key={comment.id} />
+        </div>
       ))}
     </div>
   );

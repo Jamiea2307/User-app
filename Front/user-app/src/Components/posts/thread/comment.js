@@ -7,7 +7,14 @@ const Comment = ({ comment }) => {
   const [getMoreComments, { loading, data }] = useLazyQuery(GET_MORE_COMMENTS);
 
   return (
-    <div key={comment.id}>
+    <div
+      key={comment.id}
+      style={{
+        paddingLeft: "0.5rem",
+        borderLeft: "1px solid rgba(0,0,0,0.16)",
+        // marginTop: "0.75rem",
+      }}
+    >
       {comment.name}
       {comment.body}
       <DateFormatter date={comment.date} />
@@ -20,7 +27,7 @@ const Comment = ({ comment }) => {
       {data &&
         !loading &&
         data.getMoreComments.map((comment) => (
-          <Comment comment={comment} key={comment.id} />
+          <Comment className="Comments" comment={comment} key={comment.id} />
         ))}
     </div>
   );
