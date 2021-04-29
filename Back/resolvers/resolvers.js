@@ -24,7 +24,6 @@ const resolvers = {
       Verify(req);
 
       //needs to be updated to find posts in a certain way otherwise
-      //can be removed as getUserPost has same func
       const posts = await Post.find().sort({ dateAdded: "desc" }).populate({
         path: "name",
         select: "name",
